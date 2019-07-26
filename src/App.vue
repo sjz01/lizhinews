@@ -3,6 +3,7 @@
     <Navbar />
     <router-view></router-view>
     <Tabbar />
+    <p>{{$store.state.DAI.name}}</p>
   </div>
 </template>
 
