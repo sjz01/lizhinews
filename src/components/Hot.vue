@@ -1,16 +1,20 @@
 <template>
     
         <div id="hot">
-            <h2>历知新闻</h2>
-            <span>&#xe649;</span>
-            <input type="text" placeholder="        搜索你想看的内容" id=""> 
+            <Navbar />
+            
         </div>   
     
 </template>
 
 <script>
+import Navbar from './Navbar'
         export default {
-             name: "Hot"
+             name: "Hot",
+             components:{
+                 Navbar
+             }
+
         };
 </script>
 

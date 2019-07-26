@@ -1,6 +1,6 @@
 <template>
     <div id="news">
-        <Hot />
+    <Navbar/>
         <router-view></router-view>
 
         <div>
@@ -15,11 +15,11 @@
 
 <script>
 
-import Hot from './Hot'
+import Navbar from './Navbar'
     export default {
         name: "News",
         components:{
-            Hot
+            Navbar
         }
     }
 </script>
