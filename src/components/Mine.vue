@@ -1,7 +1,7 @@
 <template>
     <div id="mine">
 <!--        个人信息页面-->
-    <div class="div" v-if="num==2">
+    <div class="div" v-if="num==1">
         <div class="item">
             <div class="itema">
                 <img src="http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg" alt="">
@@ -32,7 +32,7 @@
     </div>
 
 <!--        注册页面-->
-        <div class="rehister" v-if="num==1">
+        <div class="rehister" v-if="num==2">
         <ul>
             <li>用户名：</li>
             <li>密码：</li>
@@ -71,20 +71,27 @@
             return{
             num:0,
             username:'',
-            password:''
+            password:'',
+            login:false,
             }
         },
         methods:{
             rehister() {
-                this.num=1;
+            this.num=2;
             },
             getuser() {
-                if (this.username==''||this.password==''){
-                    alert('用户名或密码错误')
-                } else if (this.username=='admin'&&this.password=='admin') {
-                    this.num=2;
+                 if (this.username=='admin'&&this.password=='admin') {
+                    localStorage.username=this.username;
+                    localStorage.password=this.password
+                    this.num=1;
                 }
 
+
+            }
+        },
+        created() {
+            if (localStorage.username&&localStorage.password){
+                this.num=1;
             }
         }
     }
