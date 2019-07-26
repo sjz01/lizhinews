@@ -1,7 +1,7 @@
 <template>
     <div id="newlines">
         <!-- 顶部样式 没有加滑动效果 -->
-
+        <Navbar />
         <div id="Topbar" >
         <router-link  tag="span"  to="">国内</router-link>
         <router-link  tag="span"  to="">国内</router-link> 
@@ -19,12 +19,15 @@
 
 <script>
 
-
+import Navbar from "./Navbar"
 
 
 
 export default {
   name: "Newlines",
+  components:{
+    Navbar
+  }
  
 };
 </script>
