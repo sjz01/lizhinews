@@ -34,7 +34,6 @@ export default {
 
 <style lang="less" scoped>
 #newlines {
-  margin-top: 80px;
   background-color: #cccccc;
   overflow: hidden;
 
