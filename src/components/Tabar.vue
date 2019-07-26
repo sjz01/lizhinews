@@ -31,28 +31,27 @@
     #tabbar{
         position: fixed;
         bottom: 0;
-        height: 80px;
+        height: 50px;
         width: 100%;
-        background-color: #cccccc;
+        background-color: #fff;
 
         ul {
             width: 100%;
-            height: 100%;
+            height: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
 
-
-
                 li {
                 float: left;
                 text-align: center;
-                height: 100%;
+                height: 50px;
                 flex-grow: 1;
                 font-family: 'Myfont';
-                font-size: 24px;
+                font-size: 16px;
                 padding-top: 5px;
              }
+            
             .router-link-active{
                 color: tomato;
             }
