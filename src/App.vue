@@ -1,15 +1,7 @@
 <template>
   <div id="app">
-<<<<<<< HEAD
-    <!-- <Navbar /> -->
     <router-view></router-view>
     <Tabbar />
-    
-    <!-- <p>{{$store.state.DAI.name}}</p> -->
-=======
-    <router-view></router-view>
-    <Tabbar />
->>>>>>> 99cbb1b1cfcc4852ce4db22bea86e617cb27aa94
   </div>
 </template>
 
