@@ -13,10 +13,10 @@
                 <p>&#xe731;</p>
                 <p>推荐</p>
             </router-link>
-            <router-link tag="li" to="/mine">
-                <p>&#xe620;</p>
-                <p>我的</p>
-            </router-link>
+                <router-link tag="li" to="/mine" name="/mine">
+                    <p>&#xe620;</p>
+                    <p>我的</p>
+                </router-link>
         </ul>
     </div>
 </template>

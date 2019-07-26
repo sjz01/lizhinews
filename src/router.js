@@ -21,7 +21,11 @@ export default new Router({
     },
     {
       path:'/mine',
-      component:() => import('./components/Mine')
+      component:() => import('./components/Mine'),
+    },
+    {
+      path:'*',
+      redirect:'/'
     }
   ]
 })

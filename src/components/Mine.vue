@@ -1,7 +1,7 @@
 <template>
     <div id="mine">
 <!--        个人信息页面-->
-    <div class="div" v-if="isLogin">
+    <div class="div" v-if="num==2">
         <div class="item">
             <div class="itema">
                 <img src="http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg" alt="">
@@ -70,7 +70,6 @@
         data () {
             return{
             num:0,
-            isLogin:false,
             username:'',
             password:''
             }
@@ -83,7 +82,6 @@
                 if (this.username==''||this.password==''){
                     alert('用户名或密码错误')
                 } else if (this.username=='admin'&&this.password=='admin') {
-                    this.isLogin=true;
                     this.num=2;
                 }
 
