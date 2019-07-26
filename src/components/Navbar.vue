@@ -1,8 +1,8 @@
 <template>
 <div id="navbar">
-<h2>历知新闻</h2>
+            <h2>历知新闻</h2>
             <span>&#xe649;</span>
-            <input type="text" placeholder="        搜索你想看的内容" id=""> 
+            <input type="text" placeholder="搜索你想看的内容" id="">
 </div>
 </template>
 
@@ -17,12 +17,13 @@ export default {
             width: 100%;
             height: 44px;
             background: rgb(165, 46, 46);
+            position: fixed;
+            top: 0;
             span{
                 color: #ccc;
-                // float: left;
                 position: absolute;
                 font-family: 'Myfont';
-                margin-left:10px;
+                margin-left:180px;
                 margin-top: 12px;
             }
             h2 {
