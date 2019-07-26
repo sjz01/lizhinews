@@ -49,7 +49,7 @@
                 text-align: center;
                 height: 100%;
                 flex-grow: 1;
-                font-family: 'myFont';
+                font-family: 'Myfont';
                 font-size: 24px;
                 padding-top: 5px;
              }
