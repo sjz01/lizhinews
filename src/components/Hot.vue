@@ -39,7 +39,6 @@
                 width: 200px;
                 margin-top: 6px;
                 border-radius: 5px;
-                
             }
            
         }
