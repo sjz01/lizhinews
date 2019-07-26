@@ -33,6 +33,7 @@
         bottom: 0;
         height: 50px;
         width: 100%;
+        // margin-top: 50px;
         background-color: #fff;
 
         ul {
