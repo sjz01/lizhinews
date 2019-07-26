@@ -1,46 +1,65 @@
 <template>
     <div id="mine">
-<!--    <div class="div">-->
-<!--        <div class="item">-->
-<!--            <div class="itema">-->
-<!--                <img src="http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg" alt="">-->
-<!--            </div>-->
-<!--            <div class="itemb">-->
-<!--                <p>Superman</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <ul class="three">-->
-<!--            <li>-->
-<!--                <p>&#xe60f;</p>-->
-<!--                <p>收藏</p>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <p>&#xe718;</p>-->
-<!--                <p>历史</p>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <p>&#xe670;</p>-->
-<!--                <p>消息</p>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--        <ul class="fruo">-->
-<!--            <li>我要爆料</li>-->
-<!--            <li>用户反馈</li>-->
-<!--            <li>系统设置</li>-->
-<!--        </ul>-->
-<!--    </div>-->
-        <div class="rehister">
+<!--        个人信息页面-->
+    <div class="div" v-if="isLogin">
+        <div class="item">
+            <div class="itema">
+                <img src="http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg" alt="">
+            </div>
+            <div class="itemb">
+                <p>Admin</p>
+            </div>
+        </div>
+        <ul class="three">
+            <li>
+                <p>&#xe60f;</p>
+                <p>收藏</p>
+            </li>
+            <li>
+                <p>&#xe718;</p>
+                <p>历史</p>
+            </li>
+            <li>
+                <p>&#xe670;</p>
+                <p>消息</p>
+            </li>
+        </ul>
+        <ul class="fruo">
+            <li>我要爆料</li>
+            <li>用户反馈</li>
+            <li>系统设置</li>
+        </ul>
+    </div>
+
+<!--        注册页面-->
+        <div class="rehister" v-if="num==1">
+        <ul>
+            <li>用户名：</li>
+            <li>密码：</li>
+            <li>确认密码：</li>
+        </ul>
+        <ul>
+            <li><input type="text" placeholder="请输入用户名"></li>
+            <li><input type="password" placeholder="请输入密码"></li>
+            <li><input type="password" placeholder="请重复密码"></li>
+        </ul>
+        <button>注册</button>
+    </div>
+
+<!--        登陆页面-->
+        <div class="login" v-if="num==0">
             <ul>
-                <li>用户名：</li>
+                <li>账号：</li>
                 <li>密码：</li>
-                <li>确认密码：</li>
             </ul>
             <ul>
-                <li><input type="text" placeholder="请输入用户名"></li>
-                <li><input type="password" placeholder="请输入密码"></li>
-                <li><input type="password" placeholder="请重复密码"></li>
+                <li><input type="text" placeholder="请输入账号" v-model="username"></li>
+                <li><input type="password" placeholder="请输入密码" v-model="password"></li>
             </ul>
-            <button>注册</button>
+            <div>
+                <button class="btna" @click="getuser">登录</button>
+                <button class="btnb" @click="rehister">注册</button>
+            </div>
         </div>
     </div>
 </template>
@@ -50,7 +69,24 @@
         name: "Mine",
         data () {
             return{
-            num:0
+            num:0,
+            isLogin:false,
+            username:'',
+            password:''
+            }
+        },
+        methods:{
+            rehister() {
+                this.num=1;
+            },
+            getuser() {
+                if (this.username==''||this.password==''){
+                    alert('用户名或密码错误')
+                } else if (this.username=='admin'&&this.password=='admin') {
+                    this.isLogin=true;
+                    this.num=2;
+                }
+
             }
         }
     }
@@ -159,5 +195,56 @@
         margin-top: 80px;
         font-size: 20px;
         color: greenyellow;
+    }
+    .login{
+        width: 90%;
+        margin: 30% auto;
+        overflow: hidden;
+        ul{
+            float: left;
+
+
+        }
+    }
+    .login ul:nth-of-type(1){
+        width: 30%;
+    }
+    .login ul:nth-of-type(2){
+        width: 70%;
+    }
+    .login li input{
+        width: 90%;
+        height: 40px;
+    }
+    .login li input{
+        width: 90%;
+        height: 40px;
+    }
+    .login li{
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        margin: 20px 0;
+        font-size: 20px;
+    }
+    .login div{
+        width: 100%;
+        height: 50px;
+        clear: both;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 230px;
+    }
+    .btna{
+        width: 35%;
+        height: 100%;
+        background-color: #55a532;
+    }
+    .btnb{
+        width: 35%;
+        height: 100%;
+        background-color: #0086b3;
     }
 </style>
