@@ -1,44 +1,43 @@
 <template>
     <div id="mine">
-<!--        个人信息页面-->
-    <div class="div" v-if="login">
-        <div class="item" v-if="num">
-            <div class="itema">
-                <img src="http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg" alt="">
+        <!--        个人信息页面-->
+        <div class="div">
+            <div class="item" v-if="num">
+                <div class="itema">
+                    <img src="http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg" alt="">
+                </div>
+                <div class="itemb">
+                    <p>Admin</p>
+                </div>
             </div>
-            <div class="itemb">
-                <p>Admin</p>
+            <div class="item" v-if="!num">
+                <div class="itema">
+                    <img src="https://p0.ssl.qhimgs1.com/sdr/400__/t01a6aa63ec1979d394.jpg" alt="">
+                </div>
+                <router-link class="itemb" tag="div" to="/mine/login">
+                    <p>请先登录</p>
+                </router-link>
             </div>
+            <ul class="three">
+                <li>
+                    <p>&#xe60f;</p>
+                    <p>收藏</p>
+                </li>
+                <li>
+                    <p>&#xe718;</p>
+                    <p>历史</p>
+                </li>
+                <li>
+                    <p>&#xe670;</p>
+                    <p>消息</p>
+                </li>
+            </ul>
+            <ul class="fruo">
+                <li>我要爆料</li>
+                <li>用户反馈</li>
+                <li>系统设置</li>
+            </ul>
         </div>
-        <div class="item" v-if="!num">
-            <div class="itema">
-                <img src="https://p0.ssl.qhimgs1.com/sdr/400__/t01a6aa63ec1979d394.jpg" alt="">
-            </div>
-            <router-link class="itemb" tag="div" to="/mine/login">
-                <p @click="isLogin">请先登录</p>
-            </router-link>
-        </div>
-        <ul class="three">
-            <li>
-                <p>&#xe60f;</p>
-                <p>收藏</p>
-            </li>
-            <li>
-                <p>&#xe718;</p>
-                <p>历史</p>
-            </li>
-            <li>
-                <p>&#xe670;</p>
-                <p>消息</p>
-            </li>
-        </ul>
-        <ul class="fruo">
-            <li>我要爆料</li>
-            <li>用户反馈</li>
-            <li>系统设置</li>
-        </ul>
-    </div>
-        <router-view></router-view>
     </div>
 </template>
 
@@ -47,17 +46,14 @@
         name: "Mine",
         data () {
             return{
-            num:false,
-            username:'',
-            password:'',
-            login:true,
+                num:false,
+                username:'',
+                password:'',
+                login:false,
             }
         },
         methods:{
-            isLogin:function () {
-            this.login=false;
-            console.log(this.login)
-        }
+
         },
         created() {
             localStorage.clear()

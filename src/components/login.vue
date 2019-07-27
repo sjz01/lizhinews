@@ -1,26 +1,158 @@
 <template>
     <div id="login">
-        <ul>
-            <li>账号：</li>
-            <li>密码：</li>
-        </ul>
-        <ul>
-            <li><input type="text" placeholder="请输入账号" v-model="username"></li>
-            <li><input type="password" placeholder="请输入密码" v-model="password"></li>
-        </ul>
-        <div>
-            <button class="btna" @click="getuser">登录</button>
-            <button class="btnb" @click="rehister">注册</button>
+        <div class="nav">
+            <div>
+            登录
+            <router-link tag="span" to="/mine">&#xe60e;</router-link>
+            </div>
         </div>
+        <div class="pic">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564244949149&di=0dcc0781b40a6734883e8478367caa49&imgtype=0&src=http%3A%2F%2Fwww.xinhuanet.com%2Fbook%2F2019-01%2F28%2F1210048977_15486377793141n.jpg" alt="">
+        </div>
+        <div class="username">
+            <span>&#xe620;</span>
+            <input type="text" placeholder="请输入用户名" v-model="username">
+        </div>
+        <div class="password">
+            <span>&#xe63b;</span>
+            <input type="password" placeholder="请输入密码" v-model="password">
+        </div>
+        <button class="btn" @click="login">登录</button>
+        <router-link tag="div" to="/mine/rehister" class="rehister">
+            没有账号？去注册
+        </router-link>
     </div>
 </template>
 
 <script>
     export default {
-        name: "login"
+        name: "login",
+        data:function () {
+            return{
+                username:'',
+                password:''
+            }
+        },
+        methods:{
+            login:function () {
+                if (this.username == 'admin' && this.password== 'admin') {
+                    localStorage.username = this.username;
+                    localStorage.password == this.password;
+                } else {
+                    alert('账号或密码错误！请检查后在输入！')
+                }
+            }
+        }
     }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+    #login{
+        width: 100%;
+        height: 100%;
+        background-color: #cccccc;
+        .nav{
+            width: 100%;
+            height: 80px;
+            background-color: deepskyblue;
+            div{
+                width: 100%;
+                height: 100%;
+                font-size: 30px;
+                text-align: center;
+                line-height: 80px;
+                color: white;
+                span{
+                    font-family: 'Myfont';
+                    margin-left: 10px;
+                    font-size: 26px;
+                    float: left;
+                    height: 100%;
+                }
+            }
+        }
+        .pic{
+            width: 125px;
+            height: 125px;
+            border: 1px solid white;
+            border-radius: 50%;
+            margin: 30px auto;
+            overflow: hidden;
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .username{
+            width: 95%;
+            height: 80px;
+            margin: 10px auto;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            border-radius: 20px;
 
+            span{
+                font-family: "Myfont";
+                font-size: 24px;
+                display: inline-block;
+                height: 100%;
+                width: 80px;
+                text-align: center;
+                line-height: 80px;
+                float: left;
+            }
+            input{
+                height: 34px;
+                display: inline-block;
+                float: left;
+                border: 0px;
+                font-size: 24px;
+                outline:none;
+            }
+        }
+        .password{
+            width: 95%;
+            height: 80px;
+            margin: 10px auto;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            border-radius: 20px;
+
+            span{
+                font-family: "pwdFont";
+                font-size: 24px;
+                height: 100%;
+                width: 80px;
+                text-align: center;
+                line-height: 80px;
+                float: left;
+            }
+            input{
+                height: 34px;
+                display: inline-block;
+                float: left;
+                border: 0px;
+                font-size: 24px;
+                outline:none;
+            }
+        }
+        .btn{
+            width: 95%;
+            height: 65px;
+            margin: 20px auto 0;
+            background-color: deepskyblue;
+            border-radius: 20px;
+            border: 0;
+            outline: none;
+            font-size: 26px;
+            color: white;
+        }
+        .rehister{
+            color: #ee9900;
+            font-size: 18px;
+            margin: 20px;
+        }
+    }
 </style>
