@@ -22,6 +22,12 @@ export default new Router({
     {
       path:'/mine',
       component:() => import('./components/Mine'),
+      children:[
+        {
+          path:'/mine/login',
+          component:()=> import('./components/login')
+        },
+      ]
     },
     {
       path:'*',
