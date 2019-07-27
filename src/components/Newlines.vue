@@ -12,21 +12,21 @@
         <router-link  tag="span"  to="">金融</router-link>   
         <router-link  tag="span"  to="">娱乐</router-link>  
         <router-link  tag="span"  to=""> 房地产</router-link>  
-       
         </div>
+        <Dipc />
     </div>
 </template>
 
 <script>
 
 import Navbar from "./Navbar"
-
+import Dipc from "./Dipc"
 
 
 export default {
   name: "Newlines",
   components:{
-    Navbar
+    Navbar,Dipc
   }
  
 };
@@ -34,7 +34,7 @@ export default {
 
 <style lang="less" scoped>
 #newlines {
-  background-color: #cccccc;
+  margin-top: 50px;
   overflow: hidden;
 
   #Topbar {
