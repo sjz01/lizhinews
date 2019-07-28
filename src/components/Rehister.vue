@@ -3,7 +3,7 @@
         <div class="nav">
             <div>
                 注册
-                <router-link tag="span" to="/mine/login">&#xe60e;</router-link>
+                <span @click="islogin">&#xe60e;</span>
             </div>
         </div>
         <div class="pic">
@@ -40,10 +40,17 @@
                 if (this.username&&this.password&&this.repeat&&this.password==this.repeat) {
                     localStorage.username = this.username;
                     localStorage.password = this.password;
-                    alert("注册成功！")
+                    this.$store.state.S.isnike = true;
+                    this.$store.state.S.isregister=false;
+                    this.$store.state.S.islogin = false;
+                    this.$store.state.S.isme = true;
                 } else {
                     alert('账户或者密码不正确！！')
                 }
+            },
+            islogin:function () {
+                this.$store.state.S.isregister=false;
+                this.$store.state.S.islogin = true;
             }
         }
     }

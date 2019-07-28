@@ -3,7 +3,7 @@
         <div class="nav">
             <div>
             登录
-            <router-link tag="span" to="/mine">&#xe60e;</router-link>
+            <span @click="isme">&#xe60e;</span>
             </div>
         </div>
         <div class="pic">
@@ -18,9 +18,9 @@
             <input type="password" placeholder="请输入密码" v-model="password">
         </div>
         <button class="btn" @click="login">登录</button>
-        <router-link tag="div" to="/mine/rehister" class="rehister">
+        <div class="rehister" @click="isregister">
             没有账号？去注册
-        </router-link>
+        </div>
     </div>
 </template>
 
@@ -35,12 +35,29 @@
         },
         methods:{
             login:function () {
-                if (this.username == 'admin' && this.password== 'admin') {
+                if (this.username == localStorage.username && this.password== localStorage.password) {
                     localStorage.username = this.username;
                     localStorage.password == this.password;
+                    this.$store.state.S.islogin = false;
+                    this.$store.state.S.isregister = false;
+                    this.$store.state.S.isme = true;
+                    this.$store.state.S.isnike = true;
                 } else {
                     alert('账号或密码错误！请检查后在输入！')
                 }
+            },
+            isregister:function () {
+                this.$store.state.S.isregister=true;
+                this.$store.state.S.islogin = false;
+            },
+            isme:function () {
+                this.$store.state.S.islogin = false;
+                this.$store.state.S.isme = true
+            }
+        },
+        created() {
+            if (!this.$store.state.S.isme) {
+                this.$store.state.S.islogin = true;
             }
         }
     }
