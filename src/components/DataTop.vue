@@ -1,5 +1,5 @@
 <template>
-    <div id="news">
+    <div id="DataTop">
     <Navbar/>
 
         <div>
@@ -21,7 +21,7 @@ import http from '../../axios/Myapi'
 import Navbar from './Navbar'
 import Details from './Details'
     export default {
-        name: "News",
+        name: "NDataTopews",
         data:function() {
           return{
               arr:[]
