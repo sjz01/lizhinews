@@ -24,13 +24,6 @@ export default {
   },
   data() {
     return {
-        text:{},
-
-
-
-
-
-
         swiperOption: {
         spaceBetween: 30,
       centeredSlides: true,
