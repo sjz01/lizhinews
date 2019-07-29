@@ -19,6 +19,7 @@ export default {
             background: rgb(165, 46, 46);
             position: fixed;
             top: 0;
+            z-index: 10;
             span{
                 color: #ccc;
                 position: absolute;

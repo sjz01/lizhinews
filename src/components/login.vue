@@ -71,7 +71,7 @@
         .nav{
             width: 100%;
             height: 80px;
-            background-color: deepskyblue;
+            background-color:rgb(165, 46, 46);
             div{
                 width: 100%;
                 height: 100%;
@@ -159,7 +159,7 @@
             width: 95%;
             height: 65px;
             margin: 20px auto 0;
-            background-color: deepskyblue;
+            background-color: rgb(165, 46, 46);
             border-radius: 20px;
             border: 0;
             outline: none;

@@ -64,7 +64,7 @@
         .nav{
             width: 100%;
             height: 180px;
-            background-color: deepskyblue;
+            background-color: rgb(165, 46, 46);
             overflow: hidden;
 
             .pic{
