@@ -1,18 +1,10 @@
 <template>
     <div id="Dipc">
-         <swiper :options="swiperOption" ref="mySwiper"  id="swiper">
-    <!-- slides -->
-                <swiper-slide><img src="" alt=""></swiper-slide>
-                <swiper-slide>I'm Slide 2</swiper-slide>
-                <swiper-slide>I'm Slide 3</swiper-slide>
-                <swiper-slide>I'm Slide 4</swiper-slide>
-                <swiper-slide>I'm Slide 5</swiper-slide>
-                <swiper-slide>I'm Slide 6</swiper-slide>
-                <swiper-slide>I'm Slide 7</swiper-slide>
-                <!-- Optional controls -->
+         <swiper      :options="swiperOption" ref="mySwiper"  id="swiper">
+                <!-- slides -->
+                <swiper-slide  v-for="(value,key) in 5" :key="key" >I'm Slidekey {{key}}</swiper-slide>
                
-                
-                
+                <!-- Optional controls -->
          </swiper>
     </div>
 </template>
@@ -32,6 +24,13 @@ export default {
   },
   data() {
     return {
+        text:{},
+
+
+
+
+
+
         swiperOption: {
         spaceBetween: 30,
       centeredSlides: true,
@@ -56,7 +55,7 @@ export default {
       }
     },
     mounted() {
-      this.swiper.slideTo(3, 1000, false)
+      this.swiper.slideTo(0, 1000, false)
     }
 }
 </script>
