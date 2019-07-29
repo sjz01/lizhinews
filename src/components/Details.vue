@@ -38,6 +38,7 @@
         position: fixed;
         top: 0px;
         background-color: #cccccc;
+        z-index: 10;
 
         .nav{
             width: 100%;
