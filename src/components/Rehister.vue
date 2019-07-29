@@ -61,6 +61,9 @@
     width: 100%;
     height: 100%;
     background-color: #cccccc;
+    position: fixed;
+    top: 0;
+    z-index: 10;
 
 .nav{
     width: 100%;
