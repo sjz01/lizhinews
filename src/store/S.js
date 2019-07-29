@@ -3,5 +3,6 @@ export default {
     islogin:false,
     isregister:false,
     isme:true,
-    isnike:false
+    isnike:false,
+    isdetails:false
 }

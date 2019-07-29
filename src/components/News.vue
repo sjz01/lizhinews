@@ -3,22 +3,28 @@
     <Navbar/>
 
         <div>
-            <ul v-for="(movie,key) in 10" :key="key">
+            <ul v-for="(movie,key) in 10" :key="key" @click="isdetails">
                 <li>今天大海口市曾多次农家菜卡鹌鹑蛋能看出寄到你可查看擦不多见日理万列入来哦步履来吃来创建你上次的</li>
                 <li></li>
             </ul>
         </div>
-       
+        <Details v-if="$store.state.S.isdetails"/>
     </div>
 </template>
 
 <script>
 
 import Navbar from './Navbar'
+import Details from './Details'
     export default {
         name: "News",
         components:{
-            Navbar
+            Navbar,Details
+        },
+        methods:{
+            isdetails:function () {
+                this.$store.state.S.isdetails = true;
+            }
         }
     }
 </script>
