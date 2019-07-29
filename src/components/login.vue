@@ -102,7 +102,7 @@
         }
         .username{
             width: 95%;
-            height: 80px;
+            height: 60px;
             margin: 10px auto;
             background-color: white;
             display: flex;
@@ -116,7 +116,7 @@
                 height: 100%;
                 width: 80px;
                 text-align: center;
-                line-height: 80px;
+                line-height: 60px;
                 float: left;
             }
             input{
@@ -130,7 +130,7 @@
         }
         .password{
             width: 95%;
-            height: 80px;
+            height: 60px;
             margin: 10px auto;
             background-color: white;
             display: flex;
@@ -143,7 +143,7 @@
                 height: 100%;
                 width: 80px;
                 text-align: center;
-                line-height: 80px;
+                line-height: 60px;
                 float: left;
             }
             input{
@@ -170,7 +170,7 @@
             color: #ee9900;
             font-size: 18px;
             margin: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 80px;
         }
     }
 </style>

@@ -1,5 +1,6 @@
 <template>
     <div id="newlines">
+        <Navbar />
         <!-- 顶部样式 没有加滑动效果 -->
         <navbar />
         <div id="Topbar" >
