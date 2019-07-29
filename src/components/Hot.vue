@@ -3,10 +3,14 @@
         <div id="hot">
             <Navbar />
             <div>
-            <ul v-for="(movie,key) in 15" :key="key" @click="isdetails">
-                <li>今天大海口市曾多次农家菜卡鹌鹑蛋能看出寄到你可查看擦不多见日理万列入来哦步履来吃来创建你上次的</li>
-                <li></li>
-            </ul>
+                <ul v-for="(item,key) in arr" :key="key" @click="isdetails">
+                    <li>{{item.title}}</li>
+                    <li v-if="item.imageurls.length==1">
+                        <div v-for="(item,key) in item.imageurls" :key="key">
+                            <img :src="item.url" alt="">
+                        </div>
+                    </li>
+                </ul>
         </div>
             <Details  v-if="$store.state.S.isdetails"/>
         </div>   
@@ -14,10 +18,16 @@
 </template>
 
 <script>
+import http from '../../axios/Myapi'
 import Navbar from './Navbar'
 import Details from './Details'
     export default {
         name: "Hot",
+        data:function () {
+          return {
+              arr:[]
+          }
+        },
         components:{
             Navbar,Details
         },
@@ -25,6 +35,12 @@ import Details from './Details'
             isdetails:function () {
                 this.$store.state.S.isdetails = true;
             }
+        },
+        created() {
+            http.type(this,"热点").then((res)=>{
+                console.log(res)
+                this.arr = res.data.showapi_res_body.pagebean.contentlist;
+            })
         }
     };
 </script>
@@ -41,7 +57,13 @@ import Details from './Details'
             // background: navy;
             margin-top: 10px;
             border-bottom: 1px solid #eee;
-        
+            display: flex;
+
+            li{
+                text-align: left;
+                flex-grow: 1;
+                font-size: 18px;
+            }
             
         li:nth-of-type(1){
             // margin-left: 16px;
@@ -56,6 +78,10 @@ import Details from './Details'
            float: left;
            background: yellow;
 
+           img{
+               width: 60px;
+               height: 60px;
+           }
        }
 
     }

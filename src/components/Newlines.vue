@@ -3,13 +3,7 @@
         <Navbar />
         <!-- 顶部样式 没有加滑动效果 -->
         <div id="Topbar" >
-        <router-link  tag="span"  to="/news" >国内</router-link>
-        <router-link  tag="span"  to="/news">国际</router-link>  
-        <router-link  tag="span"  to="/news">IT</router-link>   
-        <router-link  tag="span"  to="/news">体育</router-link>   
-        <router-link  tag="span"  to="/news">游戏</router-link>  
-        <router-link  tag="span"  to="/news">金融</router-link>   
-        <router-link  tag="span"  to="/news">娱乐</router-link>  
+        <router-link  tag="span"  to="/news" v-for="(item,key) in $store.state.S.arr" :key="key"><span @click="isNew(item.id)">{{item.content}}</span></router-link>
         </div>
         <Dipc />
         <news />
@@ -17,13 +11,18 @@
 </template>
 
 <script>
-
+import http from '../../axios/Myapi'
 import Navbar from "./Navbar"
 import Dipc from "./Dipc"
 import News from "./News"
 
 export default {
   name: "Newlines",
+    data:function () {
+      return{
+
+      }
+    },
   components:{
     Navbar,Dipc,News
   }
@@ -33,7 +32,10 @@ export default {
     }
   },
   methods:{
-
+      isNew:function (id) {
+          this.$store.state.S.isNews = true;
+          this.$store.state.S.newsId = id;
+      }
   },
  
 };

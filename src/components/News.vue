@@ -3,9 +3,13 @@
     <Navbar/>
 
         <div>
-            <ul v-for="(movie,key) in 10" :key="key" @click="isdetails">
-                <li>今天大海口市曾多次农家菜卡鹌鹑蛋能看出寄到你可查看擦不多见日理万列入来哦步履来吃来创建你上次的</li>
-                <li></li>
+            <ul v-for="(item,key) in arr" :key="key" @click="isdetails">
+                <li>{{item.title}}</li>
+                <li v-if="item.imageurls.length==1">
+                    <div v-for="(item,key) in item.imageurls" :key="key">
+                        <img :src="item.url" alt="">
+                    </div>
+                </li>
             </ul>
         </div>
         <Details v-if="$store.state.S.isdetails"/>
@@ -13,11 +17,16 @@
 </template>
 
 <script>
-
+import http from '../../axios/Myapi'
 import Navbar from './Navbar'
 import Details from './Details'
     export default {
         name: "News",
+        data:function() {
+          return{
+              arr:[]
+          }
+        },
         components:{
             Navbar,Details
         },
@@ -25,6 +34,20 @@ import Details from './Details'
             isdetails:function () {
                 this.$store.state.S.isdetails = true;
             }
+        },
+        created() {
+            if (this.$store.state.S.isNews) {
+                http.Allnews(this,this.$store.state.S.newsId).then((res)=>{
+                    this.arr = res.data.showapi_res_body.pagebean.contentlist;
+                    console.log(this.arr)
+                })
+            } else {
+                http.type(this,'推荐').then((res)=>{
+                    console.log(res)
+                    this.arr = res.data.showapi_res_body.pagebean.channelList;
+                })
+            }
+
         }
     }
 </script>
@@ -42,20 +65,31 @@ import Details from './Details'
             // background: navy;
             margin-top: 10px;
             border-bottom: 1px solid #eee;
+            display: flex;
+
+            li{
+                text-align: left;
+                flex-grow: 1;
+                font-size: 18px;
+            }
         
             
         li:nth-of-type(1){
             // margin-left: 16px;
-            width: 72%;
+
             height: 100%;
             float: left;
         }
        li:nth-of-type(2){
            margin-left: 20px;
-           width: 50px;
            height: 50px;
            float: left;
            background: pink;
+
+           img{
+               width: 60px;
+               height: 60px;
+           }
 
        }
 
