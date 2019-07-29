@@ -52,5 +52,5 @@ function details(vue,id) {
 }
 
 export default {
-    news,type,Allnews,details
+    news,type,Allnews,details,
 }

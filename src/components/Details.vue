@@ -33,7 +33,7 @@ import http from '../../axios/Myapi'
             http.details(this,this.$store.state.DAI.Newsid).then((res)=>{
                 this.title = res.data.showapi_res_body.pagebean.contentlist[0].title;
                 this.content = res.data.showapi_res_body.pagebean.contentlist[0].content;
-             console.log(res.data.showapi_res_body.pagebean.contentlist[0].content);
+            //  console.log(res.data.showapi_res_body.pagebean.contentlist[0].content);
             })
         }
 

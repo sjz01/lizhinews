@@ -118,7 +118,6 @@ export default {
       width: 50px;
       height: 50px;
       float: left;
-      //   background: yellow;
 
       img {
         width: 60px;
