@@ -54,7 +54,7 @@
              }
             
             .router-link-active{
-                color: tomato;
+                color: rgb(165, 46, 46);
             }
         }
     }

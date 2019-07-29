@@ -159,7 +159,7 @@ span{
         outline: none;
         font-size: 26px;
         color: white;
-        margin-bottom: 50px;
+        margin-bottom: 70px;
     }
 }
 </style>
