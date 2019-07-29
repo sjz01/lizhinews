@@ -5,7 +5,7 @@
             <div>
                 <ul v-for="(item,key) in arr" :key="key" @click="isdetails">
                     <li>{{item.title}}</li>
-                    <li v-if="item.imageurls.length==1">
+                    <li v-if="item.imageurls.length>1">
                         <div v-for="(item,key) in item.imageurls" :key="key">
                             <img :src="item.url" alt="">
                         </div>
