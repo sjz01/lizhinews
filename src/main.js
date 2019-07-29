@@ -6,6 +6,7 @@ import axios from 'axios'
 
 import '../public/reset.css'
 import '../public/Myfont.css'
+import '../public/pwdFont.css'
 
 //引入swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper'
