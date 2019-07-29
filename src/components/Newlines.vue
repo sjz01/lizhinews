@@ -1,6 +1,7 @@
 <template>
     <div id="newlines">
         <!-- 顶部样式 没有加滑动效果 -->
+        <navbar />
         <div id="Topbar" >
         <router-link  tag="span"  to="/news" >国内</router-link>
         <router-link  tag="span"  to="/news">国际</router-link>  
@@ -39,24 +40,17 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.content{
-  padding:0 15px;
-  .text{
-    font-size: 14px;
-    color: rgba(69,90,100,.6);
-  }
-}
-
 
 #newlines {
   margin-top: 40px;
   overflow: hidden;
- text-align: left;
+
   #Topbar {
     width: 100%;
     background-color: white;
     justify-content: space-between;
     display: flex;
+
 
     span{
       text-align: center; 
