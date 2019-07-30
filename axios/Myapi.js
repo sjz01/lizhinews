@@ -38,6 +38,19 @@ function type(vue,title,) {
     return  vue.$axios.post(BASEURL+TYPE_PATH,param)
 }
 
+
+function details(vue,id) {
+    console.log(id)
+    var myid = id
+    var param = new URLSearchParams();
+    param.append("showapi_appid", "100961");
+    param.append("showapi_sign", "3436efd8c7304e8d9265a17599b7f8f2");
+    param.append("page", "1");
+    param.append("needContent", 1);
+    param.append("id", myid);
+    return  vue.$axios.post(BASEURL+TYPE_PATH,param)
+}
+
 export default {
-    news,type,Allnews
+    news,type,Allnews,details,
 }

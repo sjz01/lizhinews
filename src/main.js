@@ -10,7 +10,7 @@ import '../public/reset.css'
 import '../public/Myfont.css'
 import '../public/pwdFont.css'
 
-//引入swiper
+//引入swiper插件
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 // require styles

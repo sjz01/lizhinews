@@ -4,14 +4,16 @@
 
         <div>
             <ul v-for="(item,key) in arr" :key="key" @click="isdetails">
-                <li>{{item.title}}</li>
+                <li class="one">{{item.title}}<p>{{item.pubDate}} <span>{{item.source}}</span></p>
+                </li>
                 <li v-if="item.imageurls.length==1">
-                    <div v-for="(item,key) in item.imageurls" :key="key">
+                   
+                    <div   v-for="(item,key) in item.imageurls" :key="key">
                         <img :src="item.url" alt="">
                     </div>
                 </li>
             </ul>
-        </div>
+    </div>
         <Details v-if="$store.state.S.isdetails"/>
     </div>
 </template>
@@ -64,21 +66,35 @@ import Details from './Details'
             width: 90%;
             height: 66px;
             margin: 0 auto;
-            // background: navy;
             margin-top: 10px;
             border-bottom: 1px solid #eee;
             display: flex;
+             .one {
+                width: 150px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+
+                p {
+                    font-size: 12px;
+                    margin-top: 18px;
+                    color: #bbb;
+                    span {
+                    margin-left: 15px;
+                    }
+                 }
+                }
 
             li{
                 text-align: left;
                 flex-grow: 1;
                 font-size: 18px;
             }
-        
+            
             
         li:nth-of-type(1){
             // margin-left: 16px;
-
+            width: 72%;
             height: 100%;
             float: left;
         }
@@ -86,7 +102,7 @@ import Details from './Details'
            margin-left: 20px;
            height: 50px;
            float: left;
-           background: pink;
+        //    background: pink;
 
            img{
                width: 60px;
