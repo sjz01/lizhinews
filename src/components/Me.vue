@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="content">
-            <span>
+            <span @click="iscollect">
                 <p>&#xe60f;</p>
                 <p>收藏</p>
                 </span><span>
@@ -43,6 +43,10 @@
           islogin:function () {
               this.$store.state.S.isme = false;
               this.$store.state.S.islogin = true
+          },
+          iscollect:function () {
+            this.$store.state.S.iscollect = true;
+            this.$store.state.S.isme = false;
           }
         },
         created() {
