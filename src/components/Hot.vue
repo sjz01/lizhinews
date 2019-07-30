@@ -19,18 +19,6 @@
         </div>  
 
 
-        <div  v-if="$store.state.DAI.djj">
-            <div class="nav">
-            <div @click="isdetails">&#xe60e;</div>
-            <div>新闻详情</div>
-            <div>&#xe60f;</div>
-             </div>
-        <div class="content">
-            <p>{{this.title}}</p>
-            <p>{{this.content}}</p>
-            
-        </div>
-        </div>
             </div>
             
     
@@ -55,8 +43,8 @@ export default {
   },
   methods: {
     isdetails: function(id) {
-      this.$store.state.DAI.dj = false;
-      this.$store.state.DAI.djj = true;
+      this.$store.state.S.isdetails = true;
+      
       http.details(this, id).then(res => {
         this.title = res.data.showapi_res_body.pagebean.contentlist[0].title;
         this.content =
