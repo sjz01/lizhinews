@@ -59,8 +59,10 @@ import Details from './Details'
 <style lang="less" scoped>
     #news{
         width: 100%;
+        height: 90%;
         margin-top: 50px;
         margin-bottom: 50px;
+        overflow: scroll;
 
         ul{
             width: 90%;
