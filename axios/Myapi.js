@@ -1,10 +1,18 @@
 // let data = new Data();
 
+
 const BASEURL = 'https://route.showapi.com';
 const TYPE_PATH = '/109-35';
 const NEWS_PATH = '/109-34';
 const APID = "100681";
 const SING = "f6d944a97fbb47ba988a0bd9d4ae1bbf"
+
+// const TLJYURL = 'http://123.56.195.82:9999'
+const REGISTER_PATH = '/api/register'
+const LOGIN_PATH = '/api/login'
+const FIND_PATH = '/api/existUser'
+const CORRCET_PATH = '/api/getInfo'
+const PASSWORD_PATH='/api/updatePassword'
 
 
 
@@ -54,6 +62,50 @@ function details(vue,id) {
     return  vue.$axios.post(BASEURL+TYPE_PATH,param)
 }
 
+
+function register(vue,username,password,question,answer) {
+    var param = new URLSearchParams();
+    param.append("userName", username);
+    param.append("password", password);
+    param.append("question", question);
+    param.append("answer", answer);
+    param.append("favorite", 1);
+    return vue.$axios.post(REGISTER_PATH,param)
+}
+
+function login(vue,username,password) {
+    var param = new URLSearchParams();
+    param.append("userName", username);
+    param.append("password", password);
+    param.append("favorite", 1);
+    return vue.$axios.post(LOGIN_PATH,param)
+}
+
+
+function find(vue,username) {
+    var param = new URLSearchParams();
+    param.append("userName", username);
+    param.append("favorite", 1);
+    return vue.$axios.post(FIND_PATH,param)
+}
+
+function correct(vue,username) {
+    var param = new URLSearchParams();
+    param.append("userName", username);
+    param.append("favorite", 1);
+    return vue.$axios.post(CORRCET_PATH,param)
+}
+
+
+function update(vue,username,password,question,answer) {
+    var param = new URLSearchParams();
+    param.append("userName", username);
+    param.append("password", password);
+    param.append("question", question);
+    param.append("answer", answer);
+    param.append("favorite", 1);
+    return vue.$axios.post(PASSWORD_PATH,param)
+}
 export default {
-    news,type,Allnews,details,
+    news,type,Allnews,details,register,login,find,correct,update
 }

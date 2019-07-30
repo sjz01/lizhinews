@@ -7,9 +7,6 @@
             <div class="nike" v-if="$store.state.S.isnike">
                 鲁迅
             </div>
-            <div class="nike" v-if="!$store.state.S.isnike" @click="islogin">
-                请先登录
-            </div>
         </div>
         <div class="content">
             <span @click="iscollect">
@@ -32,6 +29,7 @@
 </template>
 
 <script>
+    import http from '../../axios/Myapi'
     export default {
         name: "Me",
         data:function () {
@@ -50,11 +48,15 @@
           }
         },
         created() {
-            if (localStorage.username =='admin' && localStorage.password=='admin'){
-                this.$store.state.S.nike =true
-            } else {
-                this.$store.state.S.nike =false
-            }
+            http.login(this,localStorage.username,localStorage.password).then((res)=>{
+                if (res.result) {
+                    alert('欢迎回来')
+                }else {
+                    alert('请重新登录')
+                    this.$store.state.S.isme = false;
+                    this.$store.state.S.islogin = true
+                }
+            })
         }
     }
 </script>

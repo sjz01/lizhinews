@@ -2,59 +2,58 @@
     <div id="login">
         <div class="nav">
             <div>
-            登录
-            <span @click="isme">&#xe60e;</span>
+                登录
+                <span @click="isme">&#xe60e;</span>
             </div>
         </div>
-        <div class="pic">
-            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564244949149&di=0dcc0781b40a6734883e8478367caa49&imgtype=0&src=http%3A%2F%2Fwww.xinhuanet.com%2Fbook%2F2019-01%2F28%2F1210048977_15486377793141n.jpg" alt="">
-        </div>
-        <div class="username">
-            <span>&#xe620;</span>
-            <input type="text" placeholder="请输入用户名" v-model="username">
-        </div>
-        <div class="password">
-            <span>&#xe63b;</span>
-            <input type="password" placeholder="请输入密码" v-model="password">
-        </div>
-        <button class="btn" @click="login">登录</button>
-        <div class="rehister">
-            <span @click="find">找回密码</span><span @click="isregister">前往注册</span>
+        <div class="content">
+            <div class="username">
+                <input type="text" placeholder="请输入用户名" v-model="username">
+            </div>
+            <div class="password">
+                <input type="password" placeholder="请输入密码" v-model="password">
+            </div>
+            <button class="btn" @click="login">登录</button>
+            <div class="rehister">
+                <span @click="find">找回密码</span><span @click="isregister(username,password)">前往注册</span>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import http from "../../axios/Myapi";
     export default {
         name: "login",
-        data:function () {
-            return{
-                username:'',
-                password:''
+        data: function () {
+            return {
+                username: '',
+                password: ''
             }
         },
-        methods:{
-            login:function () {
-                if (this.username == localStorage.username && this.password== localStorage.password) {
-                    localStorage.username = this.username;
-                    localStorage.password == this.password;
-                    this.$store.state.S.islogin = false;
-                    this.$store.state.S.isregister = false;
-                    this.$store.state.S.isme = true;
-                    this.$store.state.S.isnike = true;
-                } else {
-                    alert('账号或密码错误！请检查后在输入！')
-                }
+        methods: {
+            login: function () {
+                http.login(this,this.username,this.password).then((res)=>{
+                    if (res.result) {
+                        this.$store.state.S.islogin = false;
+                        this.$store.state.S.isme = true;
+                        localStorage.username = res.user;
+                        localStorage.password = res.password;
+
+                    } else {
+                        alert(res.msg);
+                    }
+                })
             },
-            isregister:function () {
-                this.$store.state.S.isregister=true;
+            isregister: function () {
+                this.$store.state.S.isregister = true;
                 this.$store.state.S.islogin = false;
             },
-            isme:function () {
+            isme: function () {
                 this.$store.state.S.islogin = false;
                 this.$store.state.S.isme = true
             },
-            find:function () {
+            find: function () {
                 this.$store.state.S.isfind = true;
                 this.$store.state.S.islogin = false;
             }
@@ -68,26 +67,28 @@
 </script>
 
 <style lang="less" scoped>
-    #login{
+    #login {
         width: 100%;
         height: 100%;
-        background-color: #cccccc;
+        background-color: #F2EFE6;
         position: fixed;
         top: 0;
         z-index: 10;
 
-        .nav{
+        .nav {
             width: 100%;
             height: 80px;
-            background-color:rgb(165, 46, 46);
-            div{
+            background-color: rgb(165, 46, 46);
+
+            div {
                 width: 100%;
                 height: 100%;
                 font-size: 30px;
                 text-align: center;
                 line-height: 80px;
                 color: white;
-                span{
+
+                span {
                     font-family: 'Myfont';
                     margin-left: 10px;
                     font-size: 26px;
@@ -96,85 +97,60 @@
                 }
             }
         }
-        .pic{
-            width: 125px;
-            height: 125px;
-            border: 1px solid white;
-            border-radius: 50%;
-            margin: 30px auto;
-            overflow: hidden;
-            img{
+        .content{
+            width: 100%;
+            height: 100%;
+            margin-top: 50px;
+        }
+        .username {
+            width: 80%;
+            height: 40px;
+            margin: 10px auto;
+            background-color: white;
+            border-bottom: 1px solid black;
+            background-color: #F2EFE6;
+
+            input {
+                height: 100%;
                 width: 100%;
-                height: 100%;
+                border: 0px;
+                font-size: 18px;
+                outline: none;
+                background-color: #F2EFE6;
             }
         }
-        .username{
-            width: 95%;
-            height: 60px;
+
+        .password {
+            width: 80%;
+            height: 40px;
             margin: 10px auto;
             background-color: white;
-            display: flex;
-            align-items: center;
-            border-radius: 20px;
+            border-bottom: 1px solid black;
+            background-color: #F2EFE6;
 
-            span{
-                font-family: "Myfont";
-                font-size: 24px;
-                display: inline-block;
+            input {
                 height: 100%;
-                width: 80px;
-                text-align: center;
-                line-height: 60px;
-                float: left;
-            }
-            input{
-                height: 34px;
-                display: inline-block;
-                float: left;
+                width: 100%;
                 border: 0px;
-                font-size: 24px;
-                outline:none;
+                font-size: 18px;
+                outline: none;
+                background-color: #F2EFE6;
             }
         }
-        .password{
-            width: 95%;
-            height: 60px;
-            margin: 10px auto;
-            background-color: white;
-            display: flex;
-            align-items: center;
-            border-radius: 20px;
 
-            span{
-                font-family: "pwdFont";
-                font-size: 24px;
-                height: 100%;
-                width: 80px;
-                text-align: center;
-                line-height: 60px;
-                float: left;
-            }
-            input{
-                height: 34px;
-                display: inline-block;
-                float: left;
-                border: 0px;
-                font-size: 24px;
-                outline:none;
-            }
-        }
-        .btn{
-            width: 95%;
-            height: 65px;
-            margin: 20px auto 0;
-            background-color: rgb(165, 46, 46);
+        .btn {
+            width: 80%;
+            height: 50px;
+            margin: 80px auto 0;
+            background-color: #F2EFE6;
             border-radius: 20px;
-            border: 0;
+            border: 1px solid rgb(165, 46, 46);
             outline: none;
-            font-size: 26px;
-            color: white;
+            font-size: 18px;
+
         }
-        .rehister{
+
+        .rehister {
             color: #ee9900;
             font-size: 18px;
             margin: 20px;
