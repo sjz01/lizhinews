@@ -7,4 +7,5 @@ export default{
     isType:false,
     isInfo:false,
     isData:true,
+    content:""
 }

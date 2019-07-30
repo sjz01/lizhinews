@@ -36,17 +36,12 @@ import Details from './Details'
             }
         },
         created() {
-            if (this.$store.state.S.isNews) {
-                http.Allnews(this,this.$store.state.S.newsId).then((res)=>{
-                    this.arr = res.data.showapi_res_body.pagebean.contentlist;
-                    console.log(this.arr)
-                })
-            } else {
+           
                 http.type(this,'推荐').then((res)=>{
                     console.log(res)
                     this.arr = res.data.showapi_res_body.pagebean.contentlist;
                 })
-            }
+
 
         }
     }

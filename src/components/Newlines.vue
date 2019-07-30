@@ -4,17 +4,21 @@
         <!-- 顶部样式 没有加滑动效果 -->
         <div v-if="$store.state.AI.isData">
         <div id="Topbar" >
-        <router-link  tag="span"  to="/news" v-for="(item,key) in $store.state.S.arr" :key="key"><span @click="isNew(item.id)">{{item.content}}</span></router-link>
+        <router-link   tag="span" to=""  v-for="(item,key) in $store.state.S.arr" :key="key"><span :class="activekey == key ? redColor : ''" @click="isNew(item.id,item.content,key)">{{item.content}}</span></router-link>
         </div>
+
+
         <Dipc />
         <!-- <news /> -->
 
           <div id="news">
-            <ul class="listul" v-for="(item,key) in list" :key="key" @click="isdetails">
-                <li>{{item.title}}</li>
-                <li v-if="item.imageurls.length >= 1">
+            <ul class="listul" v-for="(item,key) in list" :key="key" >
+              <li class="one">{{item.title}}<p>{{item.pubDate}} <span>{{item.source}}</span></p>
+                
+                <li v-if="item.imageurls.length > 1">
                     
-                        <img :src="item.img" alt="">
+                        <img :src="item.imageurls[0].url" alt="">
+                     
                     
                 </li>
             </ul>
@@ -32,14 +36,7 @@
 
         </div>
         </div>
-            <div v-if="$store.state.AI.isType">
-            <span @click="dd">列表</span>
-            </div>
-           <div v-if="$store.state.AI.isInfo">
-               <span>
-                   詳情頁
-               </span>
-            </div>
+           
     </div>
 </template>
 
@@ -51,35 +48,38 @@ import News from "./News"
 import { close, truncate } from 'fs';
 
 export default {
-  name: "Newlines",
+    name: "Newlines",
     data:function () {
       return{
         list:[],
+        activekey: 0,
+        redColor: "redColor"
       }
     },
   components:{
     Navbar,Dipc,News
   },
   methods:{
-      isNew:function (id) {
+      isNew:function (id,content,key) {
           this.$store.state.S.newsId = id;
-          this.$store.state.AI.isType = true;
-         this.$store.state.AI.isData = false;
+          this.$store.state.AI.content = content;
+          this.activekey = key;
+          console.log(this.$store.state.AI.content);
+          http.type(this,this.$store.state.AI.content).then((res)=>{
+              this.list = res.data.showapi_res_body.pagebean.contentlist;
+              console.log(this.list);
+          })
+        
       },
-      dd:function() {
-          this.$store.state.AI.isInfo = true;
-          this.$store.state.AI.isType = false;
-           this.$store.state.AI.isData = false;
-      },
-      isdetails(){ 
-       
-        this.$store.state.S.isdetails = true;
-      }
+     
   },
    created() {
-                http.type(this,'奇怪').then((res)=>{
-                this.list = res.data.showapi_res_body.pagebean.contentlist;
-                   console.log(this.list)
+                http.type(this,this.$store.state.AI.content).then((res)=>{
+                    this.list = res.data.showapi_res_body.pagebean.contentlist;
+                    // this.list.forEach(function(item){
+                    //     item.myImg = require(item.img)
+                    // })
+                    
                    
                    
                    
@@ -91,6 +91,9 @@ export default {
 
 <style lang="less" scoped>
 
+.redColor {
+    color : #a52e2e;
+}
 #newlines {
   margin-top: 40px;
   overflow: hidden;
@@ -138,26 +141,36 @@ export default {
                 text-align: left;
                 flex-grow: 1;
                 font-size: 18px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
+
         
             
         li:nth-of-type(1){
             // margin-left: 16px;
-
+            max-width: 300px;
             height: 100%;  
         }
        li:nth-of-type(2){
            margin-left: 20px;
           //  height: 50px;
-           background-color: pink;
+   
 
            img{
-               width: 40px;
-               height: 40px;
+               width: 60px;
+               height: 60px;
            }
        }
        .LiImg{
-        //  width: 60px;
-        //  height: 60px;
+         width: 60px;
+         height: 60px;
+       }
+
+       .one p,span{
+            line-height: 60px;
+           margin-top: 20;
+           font-size: 14px;
        }
 </style>
