@@ -3,7 +3,7 @@
          <div class="nav">
             <div>
             收藏
-            <span>&#xe60e;</span>
+            <span @click="iscollect">&#xe60e;</span>
             </div>
         </div>
             <ul class="inner" v-for="(item,key) in 15" :key="key">
@@ -19,7 +19,18 @@
 
 <script>
     export default {
-        name: "collect"
+        name: "collect",
+        data:function () {
+            return {
+
+            }
+        },
+        methods:{
+            iscollect:function () {
+                this.$store.state.S.iscollect = false;
+                this.$store.state.S.isme = true
+            }
+        }
     }
 </script>
 
