@@ -12,9 +12,9 @@
         <!-- <news /> -->
 
           <div id="news">
-        <router-link  tag="ul" to="/Details" class="listul" v-for="(item,key) in list" :key="key" >
-                <router-view></router-view>
-              <li class="one">{{item.title}}<p>{{item.pubDate}} <span>{{item.source}}</span></p>
+        <ul  class="listul" v-for="(item,key) in list" :key="key" v-if="!$store.state.AI.isInfo" >
+               
+              <li class="one" @click="isinfo(item.id)" >{{item.title}}<p>{{item.pubDate}} <span>{{item.source}}</span></p>
                 
                 <li v-if="item.imageurls.length > 1">
                     
@@ -22,23 +22,23 @@
                      
                     
                 </li>
-            </router-link>
-          <!-- <ul>
-              <li class="listul" v-for="(item,key) in list" :key="key" @click="isdetails">
-                 <p>
-                     <span>{{item.title}}</span>
-                </p> 
-                 <div class="ooimg" :style=" 'backgroud-image: url(' + item.img + ')' ">
-                     <img :src="item.img" alt="" class="LiImg" width="50" height="50" :style="" > -->
-                <!-- </div> 
-            </li>
-             
-          </ul> --> 
+            </ul>
 
+           </div>
         </div>
-        </div>
-           
-    </div>
+             <!-- 底下是详情页 -->
+                <div id="details" v-if="$store.state.AI.isInfo">
+                        <div class="nav">
+                            <div @click="isdetails">&#xe60e;</div>
+                            <div>新闻详情</div>
+                            <div>&#xe60f;</div>
+                        </div>
+                        <div class="content">
+                            <p>{{title}}</p>
+                            <p>{{content}}</p>
+                        </div>
+                 </div>
+            </div>
 </template>
 
 <script>
@@ -53,8 +53,11 @@ export default {
     data:function () {
       return{
         list:[],
+        infoList:[],
         activekey: 0,
-        redColor: "redColor"
+        redColor: "redColor",
+        title:"",
+        content:"",
       }
     },
   components:{
@@ -65,21 +68,33 @@ export default {
           this.$store.state.S.newsId = id;
           this.$store.state.AI.content = content;
           this.activekey = key;
-          console.log(this.$store.state.AI.content);
+          
+        },
+         
+         isdetails:function () {
+         this.$store.state.AI.isInfo = false;
+        },
+        isinfo(id){
+            this.$store.state.AI.isInfo = true;
+            console.log(1111111111111111111111111111111111111)
           http.type(this,this.$store.state.AI.content).then((res)=>{
               this.list = res.data.showapi_res_body.pagebean.contentlist;
-              console.log(this.list);
+               this.title = res.data.showapi_res_body.pagebean.contentlist[0].title;
+                this.content = res.data.showapi_res_body.pagebean.contentlist[0].content;
+                console.log(res.data.showapi_res_body.pagebean.contentlist[0]);
+
+            //   console.log(this.list);
           })
-        
-      },
+            http.type(this,id).then((res)=>{
+                // console.log(res);
+            })
+        }
      
   },
    created() {
                 http.type(this,this.$store.state.AI.content).then((res)=>{
                     this.list = res.data.showapi_res_body.pagebean.contentlist;
-                    // this.list.forEach(function(item){
-                    //     item.myImg = require(item.img)
-                    // })
+                    this.title
                     
                    
                    
@@ -98,6 +113,7 @@ export default {
 #newlines {
   margin-top: 40px;
   overflow: hidden;
+
 
   .ooimg {
       width: 60px;
@@ -172,6 +188,50 @@ export default {
        .one p,span{
             line-height: 60px;
            margin-top: 20;
-           font-size: 14px;
+           font-size: 12px;
+           color: #ccc;
        }
+        // ====================================================================================
+         #details{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0px;
+        background-color: #fff;
+        z-index: 10;
+        font-size: 16px;
+       
+      
+        
+
+        .nav{
+            width: 100%;
+            height: 80px;
+            background-color: rgb(165, 46, 46);
+            display: flex;
+            align-items: center;
+
+            div{
+                flex-grow: 1;
+                font-family: 'myFont';
+                font-size: 20px;
+                color: #fff;
+                 margin-left: 20px;
+                
+            }
+        }
+             .content{
+            width: 90%;
+            margin: 0 auto;
+          
+            p:nth-of-type(1){
+                font-size: 16px;
+                font-weight: 800;
+                margin-top: 16px;
+            }
+            
+        }
+    }
+
+       
 </style>

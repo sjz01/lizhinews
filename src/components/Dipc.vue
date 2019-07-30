@@ -57,7 +57,7 @@ export default {
      created() {
                 http.type(this,this.$store.state.AI.content).then((res)=>{
                     this.list = res.data.showapi_res_body.pagebean.contentlist;
-                    console.log(this.list)
+                    // console.log(this.list)
 
                 })  
     },
