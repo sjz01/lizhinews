@@ -18,8 +18,8 @@
             <input type="password" placeholder="请输入密码" v-model="password">
         </div>
         <button class="btn" @click="login">登录</button>
-        <div class="rehister" @click="isregister">
-            没有账号？去注册
+        <div class="rehister">
+            <span @click="find">找回密码</span><span @click="isregister">前往注册</span>
         </div>
     </div>
 </template>
@@ -53,6 +53,10 @@
             isme:function () {
                 this.$store.state.S.islogin = false;
                 this.$store.state.S.isme = true
+            },
+            find:function () {
+                this.$store.state.S.isfind = true;
+                this.$store.state.S.islogin = false;
             }
         },
         created() {
@@ -175,6 +179,10 @@
             font-size: 18px;
             margin: 20px;
             margin-bottom: 80px;
+            display: flex;
+            justify-content: space-between;
+
+
         }
     }
 </style>
