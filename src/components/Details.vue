@@ -21,12 +21,14 @@ import http from '../../axios/Myapi'
         data:function () {
             return{
                 title:"",
-                content:""
+                content:"",
+                arr:[]
             }
         },
         methods:{
             isdetails:function () {
                 this.$store.state.S.isdetails = false;
+                this.$store.state.DAI.isnews= true;
             }
         },
         created() {
@@ -34,6 +36,7 @@ import http from '../../axios/Myapi'
                 this.title = res.data.showapi_res_body.pagebean.contentlist[0].title;
                 this.content = res.data.showapi_res_body.pagebean.contentlist[0].content;
             //  console.log(res.data.showapi_res_body.pagebean.contentlist[0].content);
+            
             })
         }
 
@@ -43,11 +46,9 @@ import http from '../../axios/Myapi'
 <style lang="less" scoped>
     #details{
         width: 100%;
-        height: 130%;
-        // position: fixed;
-        // top: 0px;
+        // height: 500px;
+        bottom: 250px;
         background-color: #fff;
-       
 
         .nav{
             width: 100%;
@@ -89,6 +90,7 @@ import http from '../../axios/Myapi'
                 text-align: center;
                 margin: 0 auto;
                 font-size: 18px;
+                margin-bottom:100px;
             }
             
         }

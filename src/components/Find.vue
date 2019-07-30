@@ -30,69 +30,84 @@
 <span>新密码:</span>
 <input type="text" placeholder="请输入新密码" v-model="newpwd">
 </div>
+<button class="btn">确认</button>
 </div>
 </template>
 
 <script>
 export default {
-name: "Find",
-data:function () {
-return {
-username:''
-}
-
-}
-}
+  name: "Find",
+  data: function() {
+    return {
+      username: ""
+    };
+  }
+};
 </script>
 
 <style lang="less" scoped>
-#find{
-width: 100%;
-// height: 100%;
-background-color: #cccccc;
+#find {
+  width: 100%;
+  // height: 100%;
+  background-color: #cccccc;
 
-.nav{
-width: 100%;
-height: 80px;
-background-color:rgb(165, 46, 46);
-div{
-width: 100%;
-height: 100%;
-font-size: 20px;
-text-align: center;
-line-height: 80px;
-color: white;
-span{
-font-family: 'Myfont';
-margin-left: 10px;
-font-size: 26px;
-float: left;
-height: 100%;
-}
-}
-}
+  .nav {
+    width: 100%;
+    height: 80px;
+    background-color: rgb(165, 46, 46);
+    div {
+      width: 100%;
+      height: 100%;
+      font-size: 20px;
+      text-align: center;
+      line-height: 80px;
+      color: white;
+      span {
+        font-family: "Myfont";
+        margin-left: 10px;
+        font-size: 26px;
+        float: left;
+        height: 100%;
+      }
+    }
+  }
 
-.user,.question,.answer,.newpwd{
-width: 95%;
-height: 60px;
-margin: 10px auto;
-margin-left: 30px;
-display: flex;
-align-items: center;
-span{
-font-size: 20px;
-font-weight: 500;
-color: rgb(56, 51, 51);
-}
-input,select{
-width: 60%;
-color:#777;
-height: 50px;
-background-color: white;
-border-radius: 20px;
-font-size: 18px;
-margin-left: 26px;
-} 
-}
+  .user,
+  .question,
+  .answer,
+  .newpwd {
+    width: 95%;
+    height: 60px;
+    margin: 10px auto;
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+    span {
+      font-size: 20px;
+      font-weight: 500;
+      color: rgb(56, 51, 51);
+    }
+    input,
+    select {
+      width: 60%;
+      color: #777;
+      height: 50px;
+      background-color: white;
+      border-radius: 20px;
+      font-size: 18px;
+      margin-left: 26px;
+    }
+  }
+  .btn {
+    width: 85%;
+    height: 65px;
+    margin: 40px auto 0;
+    background-color: rgb(165, 46, 46);
+    border-radius: 20px;
+    border: 0;
+    outline: none;
+    font-size: 26px;
+    color: white;
+  }
 }
 </style>

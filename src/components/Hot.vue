@@ -2,8 +2,8 @@
     
         <div id="hot">
             <div>
-                     <Navbar v-if="$store.state.DAI.dj"/>
-            <div v-if="$store.state.DAI.dj">
+                     <Navbar v-if="$store.state.DAI.isnews"/>
+            <div v-if="$store.state.DAI.isnews">
                 <ul v-for="(item,key) in arr" :key="key" @click="isdetails(item.id)">
                     <li class="one">{{item.title}}<p>{{item.pubDate}} <span>{{item.source}}</span></p>
                    </li>
@@ -17,8 +17,6 @@
         </div>
             <Details  v-if="$store.state.S.isdetails"/>
         </div>  
-
-
             </div>
             
     
@@ -44,7 +42,9 @@ export default {
   methods: {
     isdetails: function(id) {
       this.$store.state.S.isdetails = true;
-      
+      this.$store.state.DAI.Newsid = id;
+      this.$store.state.DAI.isnews= false;
+      console.log(id);
       http.details(this, id).then(res => {
         this.title = res.data.showapi_res_body.pagebean.contentlist[0].title;
         this.content =
@@ -54,7 +54,7 @@ export default {
   },
   created() {
     http.type(this, "热点").then(res => {
-      console.log(res);
+      // console.log(res);
       this.arr = res.data.showapi_res_body.pagebean.contentlist;
     });
   }

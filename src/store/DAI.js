@@ -3,4 +3,6 @@ export default {
     Newsid:'',
     dj:true,
     djj:false,
+    isnews:true,
+    
 }
