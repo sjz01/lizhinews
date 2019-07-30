@@ -43,18 +43,21 @@ import http from '../../axios/Myapi'
 <style lang="less" scoped>
     #details{
         width: 100%;
-        height: 100%;
-        position: fixed;
-        top: 0px;
+        height: 130%;
+        // position: fixed;
+        // top: 0px;
         background-color: #fff;
-        z-index: 10;
+       
 
         .nav{
             width: 100%;
             height: 80px;
             background-color: rgb(165, 46, 46);
             display: flex;
+            position: fixed;
+            top: 0;
             align-items: center;
+            z-index: 10;
 
             div{
                 flex-grow: 1;
@@ -65,12 +68,27 @@ import http from '../../axios/Myapi'
             }
         }
         .content{
-            width: 90%;
+            width: 100%;
+            position: absolute;
+            top: 80px;
+            background: #fff;
             text-align: center;
             p:nth-of-type(1){
+                width: 90%;
+                text-align: center;
+                // background: cadetblue;
+                margin: 0 auto;
                 font-size: 16px;
                 font-weight: 800;
                 margin-top: 16px;
+            }
+            p:nth-of-type(2){
+                padding-top: 20px;
+                width: 90%;
+                text-indent: 2rem;
+                text-align: center;
+                margin: 0 auto;
+                font-size: 18px;
             }
             
         }
