@@ -1,9 +1,9 @@
 <template>
     
-        <div id="hot">
-            <div>
+      <div id="hot">
+           <div>
                      <Navbar v-if="$store.state.DAI.isnews"/>
-            <div v-if="$store.state.DAI.isnews">
+            <div class="topdiv" v-if="$store.state.DAI.isnews">
                 <ul v-for="(item,key) in arr" :key="key" @click="isdetails(item.id)">
                     <li class="one">{{item.title}}<p>{{item.pubDate}} <span>{{item.source}}</span></p>
                    </li>
@@ -14,10 +14,11 @@
                         </div>
                     </li>
                 </ul>
-        </div>
-            <Details  v-if="$store.state.S.isdetails"/>
-        </div>  
             </div>
+            <Details  v-if="$store.state.S.isdetails"/>
+            <Tabbar  v-if="!$store.state.S.isdetails" />
+           </div>  
+      </div>
             
     
 </template>
@@ -26,6 +27,7 @@
 import http from "../../axios/Myapi";
 import Navbar from "./Navbar";
 import Details from "./Details";
+import Tabbar  from "./Tabar"
 export default {
   name: "Hot",
   data: function() {
@@ -37,7 +39,8 @@ export default {
   },
   components: {
     Navbar,
-    Details
+    Details,
+    Tabbar
   },
   methods: {
     isdetails: function(id) {
@@ -47,8 +50,7 @@ export default {
       console.log(id);
       http.details(this, id).then(res => {
         this.title = res.data.showapi_res_body.pagebean.contentlist[0].title;
-        this.content =
-          res.data.showapi_res_body.pagebean.contentlist[0].content;
+        this.content =res.data.showapi_res_body.pagebean.contentlist[0].content;
       });
     }
   },
@@ -64,8 +66,11 @@ export default {
 <style lang="less" scoped>
 #hot {
   width: 100%;
-  margin-top: 50px;
+    
   margin-bottom: 50px;
+  .topdiv{
+    margin-top: 50px;
+  }
   ul {
     width: 90%;
     height: 66px;

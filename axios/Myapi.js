@@ -3,8 +3,8 @@
 const BASEURL = 'https://route.showapi.com';
 const TYPE_PATH = '/109-35';
 const NEWS_PATH = '/109-34';
-const APID = "100681";
-const SING = "f6d944a97fbb47ba988a0bd9d4ae1bbf"
+const APID = "101288";
+const SING = "12898b976ad74fb5a1b1fa4330e240f5"
 
 
 

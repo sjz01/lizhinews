@@ -4,5 +4,6 @@ export default{
     arr:[],
     isInfo:false,
     isData:true,
-    content:""
+    content:"",
+    newsid:'',
 }
