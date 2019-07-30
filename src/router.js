@@ -9,8 +9,14 @@ export default new Router({
   routes: [
       {
         path:'/',
-        component:() => import('./components/Newlines')
+        component:() => import('./components/Newlines'),
       },
+      {
+        path:"/Details",
+        comments:() =>import("./components/Details.vue")
+    },
+        
+    
     {
       path:'/Hot',
       component:() => import('./components/Hot')

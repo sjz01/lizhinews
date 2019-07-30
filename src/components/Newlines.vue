@@ -12,7 +12,8 @@
         <!-- <news /> -->
 
           <div id="news">
-            <ul class="listul" v-for="(item,key) in list" :key="key" >
+        <router-link  tag="ul" to="/Details" class="listul" v-for="(item,key) in list" :key="key" >
+                <router-view></router-view>
               <li class="one">{{item.title}}<p>{{item.pubDate}} <span>{{item.source}}</span></p>
                 
                 <li v-if="item.imageurls.length > 1">
@@ -21,7 +22,7 @@
                      
                     
                 </li>
-            </ul>
+            </router-link>
           <!-- <ul>
               <li class="listul" v-for="(item,key) in list" :key="key" @click="isdetails">
                  <p>
