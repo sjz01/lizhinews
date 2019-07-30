@@ -5,11 +5,13 @@
             <div>新闻详情</div>
             <div>&#xe60f;</div>
         </div>
-        <div class="content">
-            <p>{{this.title}}</p>
-            <p>{{this.content}}</p>
-            
-        </div>
+
+        <!-- 正文 -->
+                     <p class="title">{{title}}</p>
+                        <div  v-for="(item,key) in allList" :key="key" class="content">
+                              <img  v-if="item.url" :src=item.url alt="">
+                            <p v-if="item.length>3" class="text">{{item}}</p>
+                        </div>
     </div>
 </template>
 
@@ -21,7 +23,7 @@ import http from '../../axios/Myapi'
         data:function () {
             return{
                 title:"",
-                content:"",
+                allList:[],
                 arr:[]
             }
         },
@@ -34,7 +36,7 @@ import http from '../../axios/Myapi'
         created() {
             http.details(this,this.$store.state.DAI.Newsid).then((res)=>{
                 this.title = res.data.showapi_res_body.pagebean.contentlist[0].title;
-                this.content = res.data.showapi_res_body.pagebean.contentlist[0].content;
+                this.allList = res.data.showapi_res_body.pagebean.contentlist[0].allList;
             //  console.log(res.data.showapi_res_body.pagebean.contentlist[0].content);
             
             })
@@ -44,55 +46,56 @@ import http from '../../axios/Myapi'
 </script>
 
 <style lang="less" scoped>
-    #details{
-        width: 100%;
-        // height: 500px;
-        bottom: 250px;
-        background-color: #fff;
+         #details{
+            width: 100%;
+            height: 100%;
+            // position: fixed;
+            top: 0px;
+            background-color: #fff;
+            z-index: 10;
+            font-size: 16px;
+            text-align: left;
+      
+        
 
         .nav{
             width: 100%;
             height: 80px;
             background-color: rgb(165, 46, 46);
             display: flex;
-            position: fixed;
-            top: 0;
             align-items: center;
-            z-index: 10;
+            position: fixed;
+            top: 0px;
 
             div{
                 flex-grow: 1;
                 font-family: 'myFont';
                 font-size: 20px;
                 color: #fff;
+                 margin-left: 20px;
                 
             }
         }
-        .content{
-            width: 100%;
-            position: absolute;
-            top: 80px;
-            background: #fff;
-            text-align: center;
-            p:nth-of-type(1){
-                width: 90%;
-                text-align: center;
-                // background: cadetblue;
-                margin: 0 auto;
-                font-size: 16px;
-                font-weight: 800;
-                margin-top: 16px;
-            }
-            p:nth-of-type(2){
-                padding-top: 20px;
-                width: 90%;
-                text-indent: 2rem;
-                text-align: center;
-                margin: 0 auto;
-                font-size: 18px;
-                margin-bottom:100px;
-            }
-            
+        
+        .title{
+                    text-align: center;
+                    margin-bottom: 20px;
+                    font-weight: 800;
+                    margin-top: 90px;
+                }
+             .content{
+            width: 90%;
+            margin: 0 auto;
+               
+
+                img{
+                    width: 100%;
+                    height: 200px;
+                }
+                .text{
+                    text-indent:2rem;
+                }
         }
     }
+
 </style>

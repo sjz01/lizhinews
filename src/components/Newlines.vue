@@ -1,5 +1,6 @@
 <template>
     <div id="newlines">
+    <div v-if="!$store.state.AI.isInfo">
         <Navbar />
         <!-- 顶部样式 没有加滑动效果 -->
         <div v-if="$store.state.AI.isData">
@@ -7,10 +8,10 @@
         <router-link   tag="span" to=""  v-for="(item,key) in $store.state.S.arr" :key="key"><span :class="activekey == key ? redColor : ''" @click="isNew(item.id,item.content,key)">{{item.content}}</span></router-link>
         </div>
 
-
+        <!-- 轮播图 -->
         <Dipc />
         <!-- <news /> -->
-
+    </div>
           <div id="news">
         <ul  class="listul" v-for="(item,key) in list" :key="key" v-if="!$store.state.AI.isInfo" >
                
@@ -23,7 +24,8 @@
                     
                 </li>
             </ul>
-
+            <!-- 底部导航栏 -->
+            <Tabbar />
            </div>
         </div>
              <!-- 底下是详情页 -->
@@ -33,9 +35,10 @@
                             <div>新闻详情</div>
                             <div>&#xe60f;</div>
                         </div>
-                        <div class="content">
-                            <p>{{title}}</p>
-                            <p>{{content}}</p>
+                        <p class="title">{{title}}</p>
+                        <div  v-for="(item,key) in allList" :key="key" class="content">
+                              <img  v-if="item.url" :src=item.url alt="">
+                            <p v-if="item.length>3" class="text">{{item}}</p>
                         </div>
                  </div>
             </div>
@@ -46,6 +49,7 @@ import http from '../../axios/Myapi'
 import Navbar from "./Navbar"
 import Dipc from "./Dipc"
 import News from "./News"
+import Tabbar from "./Tabar"
 import { close, truncate } from 'fs';
 
 export default {
@@ -57,18 +61,21 @@ export default {
         activekey: 0,
         redColor: "redColor",
         title:"",
-        content:"",
+        allList:[],
       }
     },
   components:{
-    Navbar,Dipc,News
+    Navbar,Dipc,News,Tabbar
   },
   methods:{
       isNew:function (id,content,key) {
-          this.$store.state.S.newsId = id;
+          this.$store.state.AI.newsId = id;
           this.$store.state.AI.content = content;
           this.activekey = key;
-          
+              http.type( this,content).then((res)=>{
+                  this.list = res.data.showapi_res_body.pagebean.contentlist;
+              })
+        
         },
          
          isdetails:function () {
@@ -76,12 +83,12 @@ export default {
         },
         isinfo(id){
             this.$store.state.AI.isInfo = true;
-            console.log(1111111111111111111111111111111111111)
-          http.type(this,this.$store.state.AI.content).then((res)=>{
-              this.list = res.data.showapi_res_body.pagebean.contentlist;
+           
+          http.details(this,id).then((res)=>{
                this.title = res.data.showapi_res_body.pagebean.contentlist[0].title;
-                this.content = res.data.showapi_res_body.pagebean.contentlist[0].content;
-                console.log(res.data.showapi_res_body.pagebean.contentlist[0]);
+      
+                this.allList = res.data.showapi_res_body.pagebean.contentlist[0].allList;
+                 console.log(res.data.showapi_res_body.pagebean.contentlist[0].allList);
 
             //   console.log(this.list);
           })
@@ -94,11 +101,6 @@ export default {
    created() {
                 http.type(this,this.$store.state.AI.content).then((res)=>{
                     this.list = res.data.showapi_res_body.pagebean.contentlist;
-                    this.title
-                    
-                   
-                   
-                   
                 })  
              }
 };
@@ -111,9 +113,9 @@ export default {
     color : #a52e2e;
 }
 #newlines {
-  margin-top: 40px;
-  overflow: hidden;
 
+  overflow: hidden;
+    margin-bottom: 50px;
 
   .ooimg {
       width: 60px;
@@ -121,6 +123,7 @@ export default {
   }
 
   #Topbar {
+    margin-top:50px;
     width: 100%;
     background-color: white;
     justify-content: space-between;
@@ -193,14 +196,14 @@ export default {
        }
         // ====================================================================================
          #details{
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        top: 0px;
-        background-color: #fff;
-        z-index: 10;
-        font-size: 16px;
-       
+            width: 100%;
+            height: 100%;
+            // position: fixed;
+            top: 0px;
+            background-color: #fff;
+            z-index: 10;
+            font-size: 16px;
+            text-align: left;
       
         
 
@@ -210,6 +213,8 @@ export default {
             background-color: rgb(165, 46, 46);
             display: flex;
             align-items: center;
+            position: fixed;
+            top: 0px;
 
             div{
                 flex-grow: 1;
@@ -220,16 +225,25 @@ export default {
                 
             }
         }
+        
+        .title{
+                    text-align: center;
+                    margin-bottom: 20px;
+                    font-weight: 800;
+                    margin-top: 90px;
+                }
              .content{
             width: 90%;
             margin: 0 auto;
-          
-            p:nth-of-type(1){
-                font-size: 16px;
-                font-weight: 800;
-                margin-top: 16px;
-            }
-            
+               
+
+                img{
+                    width: 100%;
+                    height: 200px;
+                }
+                .text{
+                    text-indent:2rem;
+                }
         }
     }
 
