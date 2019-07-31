@@ -40,6 +40,7 @@
                     if (res.data.result){
                         console.log(res)
                         localStorage.username = this.username
+                        localStorage.password = this.password
                         localStorage.question = this.question
                         localStorage.answer = this.answer;
                         this.$store.state.S.isregister=false;
