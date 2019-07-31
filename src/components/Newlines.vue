@@ -14,27 +14,32 @@
         <Dipc />
         <!-- <news /> -->
          
-          <div id="news">
-        <ul  class="listul" v-for="(item,key) in list" :key="key" v-if="!$store.state.AI.isInfo" >
-               
-              <li class="one" @click="isinfo(item.id)" >{{item.title}}<p>{{item.pubDate}} <span>{{item.source}}</span></p>
-                
-                <li v-if="item.imageurls.length > 1">
-                    
-                        <img :src="item.imageurls[0].url" alt="">
-                     
-                    
-                </li>
-            </ul>
+          <div id="news" v-if="!$store.state.AI.islupo">
+                    <ul  class="listul" v-for="(item,key) in list" :key="key" v-if="!$store.state.AI.isInfo" >
+
+                        <li class="one" @click="isinfo(item.id)" >{{item.title}}<p>{{item.pubDate}} <span>{{item.source}}</span></p>
+                            
+                            <li v-if="item.imageurls.length > 1">
+                                
+                                    <img :src="item.imageurls[0].url" alt="">
+                                
+                                
+                            </li>
+                    </ul>
             <!-- 底部导航栏 -->
-            <div  v-if="!$store.state.AI.islupo">
-                <Tabbar />
-            </div>
             
-           </div>
+                <Tabbar />
+             </div>
+            
+          
         </div>
+
+
              <!-- 底下是详情页 -->
-                <div id="details" v-if="$store.state.AI.isInfo">
+            
+             
+                
+                    <div id="details" v-if="$store.state.AI.isInfo">
                         <div class="nav">
                             <div @click="isdetails">&#xe60e;</div>
                             <div>新闻详情</div>
@@ -45,8 +50,9 @@
                               <img  v-if="item.url" :src=item.url alt="">
                             <p v-if="item.length>3" class="text">{{item}}</p>
                         </div>
-                 </div>
-            </div>
+                    </div>
+                     
+        </div>
 </template>
 
 <script>
