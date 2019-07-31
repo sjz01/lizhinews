@@ -44,7 +44,6 @@
         },
         methods: {
             find: function () {
-                console.log(this.username)
                 http.find(this,this.username).then((res) => {
                     if (res.data.result) {
                         http.correct(this,this.username).then((res) => {
