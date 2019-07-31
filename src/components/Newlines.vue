@@ -123,7 +123,7 @@ export default {
                 http.type(this,this.$store.state.AI.content).then((res)=>{
                     this.list = res.data.showapi_res_body.pagebean.contentlist;
                 })  ,
-                http.updataFavorite(this,localStorage.username,localStorage.password)
+                http.getFavorite(this,localStorage.username,localStorage.password)
              }
 };
 </script>
