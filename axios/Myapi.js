@@ -13,6 +13,8 @@ const LOGIN_PATH = '/api/login'
 const FIND_PATH = '/api/existUser'
 const CORRCET_PATH = '/api/getInfo'
 const PASSWORD_PATH='/api/updatePassword'
+const FAVORITE_PATH = '/api/updateFavorite'
+const GFAVORITE_PATH = '/api/getFavorite'
 
 
 
@@ -68,7 +70,7 @@ function register(vue,username,password,question,answer) {
     param.append("password", password);
     param.append("question", question);
     param.append("answer", answer);
-    param.append("favorite", 1);
+    param.append("favorite", null);
     return vue.$axios.post(REGISTER_PATH,param)
 }
 
@@ -76,7 +78,7 @@ function login(vue,username,password) {
     var param = new URLSearchParams();
     param.append("userName", username);
     param.append("password", password);
-    param.append("favorite", 1);
+    param.append("favorite", null);
     return vue.$axios.post(LOGIN_PATH,param)
 }
 
@@ -84,14 +86,14 @@ function login(vue,username,password) {
 function find(vue,username) {
     var param = new URLSearchParams();
     param.append("userName", username);
-    param.append("favorite", 1);
+    param.append("favorite", null);
     return vue.$axios.post(FIND_PATH,param)
 }
 
 function correct(vue,username) {
     var param = new URLSearchParams();
     param.append("userName", username);
-    param.append("favorite", 1);
+    param.append("favorite", null);
     return vue.$axios.post(CORRCET_PATH,param)
 }
 
@@ -102,9 +104,27 @@ function update(vue,username,password,question,answer) {
     param.append("password", password);
     param.append("question", question);
     param.append("answer", answer);
-    param.append("favorite", 1);
+    param.append("favorite", null);
     return vue.$axios.post(PASSWORD_PATH,param)
 }
+
+function  getFavorite(vue,username,password) {
+    var param = new URLSearchParams();
+    param.append("userName", username);
+    param.append("password", password);
+    param.append("favorite", null);
+    return vue.$axios.post(GFAVORITE_PATH,param)
+}
+
+function  updataFavorite(vue,username,password,question,answer,arr) {
+    var param = new URLSearchParams();
+    param.append("userName", username);
+    param.append("password", password);
+    param.append("question", question);
+    param.append("answer", answer);
+    param.append("favorite", arr);
+    return vue.$axios.post(GFAVORITE_PATH,param)
+}
 export default {
-    news,type,Allnews,details,register,login,find,correct,update
+    news,type,Allnews,details,register,login,find,correct,update,updataFavorite,getFavorite
 }

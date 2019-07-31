@@ -40,6 +40,8 @@
                     if (res.data.result){
                         console.log(res)
                         localStorage.username = this.username
+                        localStorage.question = this.question
+                        localStorage.answer = this.answer;
                         this.$store.state.S.isregister=false;
                         this.$store.state.S.isme = true;
                     } else {
