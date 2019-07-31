@@ -115,15 +115,17 @@ export default {
 
             //   console.log(this.list);
           })
+        
          
-        }
+        },
+
      
   },
    created() {
                 http.type(this,this.$store.state.AI.content).then((res)=>{
                     this.list = res.data.showapi_res_body.pagebean.contentlist;
-                })  ,
-                http.getFavorite(this,localStorage.username,localStorage.password)
+                })  
+               
              }
 };
 </script>
