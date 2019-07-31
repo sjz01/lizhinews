@@ -1,6 +1,6 @@
 <template>
 <div id="newlines" >
-    <div v-if="(!$store.state.AI.isInfo)">
+    <div v-show="(!$store.state.AI.isInfo)">
            
             <div v-if="!$store.state.AI.islupo" >          
                 <Navbar />
@@ -47,14 +47,14 @@
              <!-- 底下是详情页 -->
             
              
-                    <div  v-if="$store.state.AI.OnlyNav">
+                    <div  v-show="$store.state.AI.OnlyNav">
 
                    
                         <div id="details" v-if="$store.state.AI.isInfo">
                             <div class="nav">
                                 <div @click="isdetails">&#xe60e;</div>
                                 <div>新闻详情</div>
-                                <div>&#xe60f;</div>
+                                <div @click="updataFavorite($store.state.AI.newsId,title,url,pubDate,source)">&#xe60f;</div>
                             </div>
                             <p class="title">{{title}}</p>
                             <div  v-for="(item,key) in allList" :key="key" class="content">
@@ -84,6 +84,10 @@ export default {
         redColor: "redColor",
         title:"",
         allList:[],
+        pubDate:'',
+        source:'',
+        url:''
+
       }
     },
   components:{
@@ -104,21 +108,58 @@ export default {
          this.$store.state.AI.isInfo = false;
         },
         isinfo(id){
+          // this.farr={id:id,title:title,url:url}
+          // this.$store.state.S.favorite.push(farr)
+
             this.$store.state.AI.isInfo = true;
            this.$store.state.AI.newsId = id;
           http.details(this,this.$store.state.AI.newsId).then((res)=>{
               
                this.title = res.data.showapi_res_body.pagebean.contentlist[0].title;
-      
+              this.pubDate = res.data.showapi_res_body.pagebean.contentlist[0].pubDate
+              this.source = res.data.showapi_res_body.pagebean.contentlist[0].source
+              this.url = res.data.showapi_res_body.pagebean.contentlist[0].url
                 this.allList = res.data.showapi_res_body.pagebean.contentlist[0].allList;
-                 console.log(res.data.showapi_res_body.pagebean.contentlist[0].allList);
+                 // console.log(res.data.showapi_res_body.pagebean.contentlist[0].allList);
 
             //   console.log(this.list);
           })
-        
-         
-        },
 
+            // console.log(id)
+            // console.log(http);
+          // console.log(localStorage)
+            http.getFavorite(this,localStorage.username,localStorage.password)
+                .then((res)=>{
+                    this.$store.state.S.favorite = res.data.user[4].favorite
+                    console.log(this.$store.state.S.favorite)
+            })
+        },
+      updataFavorite:function (id,title,url,pubDate,source) {
+          console.log(this.$store.state.S.obj,'----------------obj')
+          console.log(this.$store.state.S.favorite,'---------------------S之前')
+          if (this.$store.state.S.favorite.length==0){
+              this.$store.state.S.favorite.push({id:id,title:title,url:url,pubDate:pubDate,source:source,})
+          }else {
+              this.$store.state.S.favorite.forEach((item)=>{
+                  if (item.id == id) {
+                      alert('已经收藏过了哦，不用在收藏了')
+                  }else {
+                      this.$store.state.S.favorite.push({id:id,title:title,url:url,pubDate:pubDate,source:source,})
+                  }
+
+              })
+          }
+
+          console.log(this.$store.state.S.favorite,'---------------------S之后')
+          this.$store.state.S.Jstring = JSON.stringify(this.$store.state.S.favorite)
+          console.log(this.$store.state.S.Jstring,'这是JSON字符串')
+          console.log(this.$store.state.S.favorite,'这是S')
+          console.log(localStorage.username)
+          http.updataFavorite(this,localStorage.username,localStorage.password,localStorage.question,localStorage.answer,this.$store.state.S.Jstring).then((res)=>{
+              console.log(res)
+              // localStorage.favorite = JSON.parse(res.data)
+          })
+      }
      
   },
    created() {
@@ -126,7 +167,10 @@ export default {
                     this.list = res.data.showapi_res_body.pagebean.contentlist;
                 })  
                
-             }
+             },
+    destroyed() {
+        console.log(this.$store.state.S.favorite)
+    }
 };
 </script>
 
@@ -214,7 +258,7 @@ export default {
 
        .one p,span{
             line-height: 60px;
-           margin-top: 20;
+           /*margin-top: 20px;*/
            font-size: 12px;
            color: #ccc;
        }
