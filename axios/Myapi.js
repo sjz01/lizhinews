@@ -7,6 +7,7 @@ const NEWS_PATH = '/109-34';
 const APID = "100681";
 const SING = "f6d944a97fbb47ba988a0bd9d4ae1bbf";
 
+
 // const TLJYURL = 'http://123.56.195.82:9999'
 const REGISTER_PATH = '/api/register'
 const LOGIN_PATH = '/api/login'
@@ -14,7 +15,7 @@ const FIND_PATH = '/api/existUser'
 const CORRCET_PATH = '/api/getInfo'
 const PASSWORD_PATH='/api/updatePassword'
 const FAVORITE_PATH = '/api/updateFavorite'
-const GFAVORITE_PATH = '/api/getFavorite'
+    const GFAVORITE_PATH = '/api/getFavorite'
 
 
 
@@ -116,14 +117,14 @@ function  getFavorite(vue,username,password) {
     return vue.$axios.post(GFAVORITE_PATH,param)
 }
 
-function  updataFavorite(vue,username,password,question,answer,arr) {
+function  updataFavorite(vue,username,password,question,answer,favorite) {
     var param = new URLSearchParams();
     param.append("userName", username);
     param.append("password", password);
     param.append("question", question);
     param.append("answer", answer);
-    param.append("favorite", arr);
-    return vue.$axios.post(GFAVORITE_PATH,param)
+    param.append("favorite", favorite);
+    return vue.$axios.post(FAVORITE_PATH,param)
 }
 export default {
     news,type,Allnews,details,register,login,find,correct,update,updataFavorite,getFavorite

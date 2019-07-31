@@ -36,6 +36,8 @@
                 http.login(this,this.username,this.password).then((res)=>{
                     if (res.data.result) {
                         localStorage.username = this.username
+                        localStorage.password = this.password
+                        console.log(localStorage.username,localStorage.password)
                         this.$store.state.S.islogin = false;
                         this.$store.state.S.isme = true;
                     } else {

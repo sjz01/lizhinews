@@ -6,22 +6,27 @@
             <span @click="iscollect">&#xe60e;</span>
             </div>
         </div>
-            <ul class="inner" v-for="(item,key) in 15" :key="key">
-                <li class="inner1"></li>
+        <div class="content">
+
+
+            <ul class="inner" v-for="(item,key) in content" :key="key">
+                <li class="inner1">{{item.url}}</li>
                 <li class="inner2">
-                    今天周会微积分就送乌兰饿哦问客服搜啊呢我端接口送礼物咳嗽阿联酋拍呢金佛山我而非妞儿飞牛网给我搜啊接了判断是奥拉夫
-                    <p>111<span>222</span></p>
+                    {{item.title}}
+                    <p>{{item.pubDate}}<span>{{item.source}}</span></p>
                 </li>
             </ul>
+        </div>
     </div>
 </template>
 
 <script>
+    import http from '../../axios/Myapi'
     export default {
         name: "collect",
         data:function () {
             return {
-
+                content:[]
             }
         },
         methods:{
@@ -29,6 +34,14 @@
                 this.$store.state.S.iscollect = false;
                 this.$store.state.S.isme = true
             }
+        },
+        created() {
+            console.log(localStorage.username)
+            http.getFavorite(this,localStorage.username,localStorage.password)
+                .then((res)=>{
+                    this.content = res.data.user[4].favorite
+                    console.log(res)
+                })
         }
     }
 </script>
@@ -62,7 +75,7 @@
         }
         .inner{
             width: 95%;
-            margin: 0 auto;
+            margin: 0px auto 0px;
             margin-left: 15px;
             height: 80px;
             border-bottom: 1px solid #ddd;
@@ -92,6 +105,10 @@
 
                 }
             }
+        }
+        .content{
+            width: 100%;
+            margin-top: 80px;
         }
     }
 
