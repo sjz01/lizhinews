@@ -1,10 +1,7 @@
 <template>
 <div id="newlines" >
       
-        <!-- 列表页 -->
-       <div>
-    <div v-show="(!$store.state.AI.isInfo)">
-           
+    
         <div v-if="(!$store.state.AI.isInfo)">
                      <Navbar />
                      
@@ -49,17 +46,7 @@
             
              
                 
-                    <div id="details" v-if="$store.state.AI.isInfo">
-                        <div class="nav">
-                            <div @click="isdetails">&#xe60e;</div>
-                            <div>新闻详情</div>
-                            <div>&#xe60f;</div>
-                        </div>
-                        <p class="title">{{title}}</p>
-                        <div  v-for="(item,key) in allList" :key="key" class="content">
-                              <img  v-if="item.url" :src=item.url alt="">
-                            <p v-if="item.length>3" class="text">{{item}}</p>
-                    <div  v-show="$store.state.AI.OnlyNav">
+                   
 
                    
                         <div id="details" v-if="$store.state.AI.isInfo">
@@ -75,8 +62,8 @@
                             </div>
                         </div>
                     </div>
- </div>                     
-</div>
+                    
+
 </template>
 
 <script>
