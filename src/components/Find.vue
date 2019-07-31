@@ -8,7 +8,7 @@
         </div>
         <div class="content">
             <div class="user">
-                <input type="text" placeholder="来！输入你那个惊天地泣鬼神的名字！" v-model="username" @change="find(this,username)">
+                <input type="text" placeholder="来！输入你那个惊天地泣鬼神的名字！" v-model="username" @change="find">
             </div>
             <div class="question">
                 <input type="text" placeholder="来！输入你当时设置的那个奇葩问题！" v-model="question">
@@ -20,7 +20,7 @@
                 <input type="text" placeholder="记住你这个新密码" v-model="password">
             </div>
         </div>
-        <button class="btn" @click="correct(this,username,password,question,answer)">一定要记住你的新密码！！！</button>
+        <button class="btn" @click="modification">一定要记住你的新密码！！！</button>
     </div>
 </template>
 
@@ -44,20 +44,14 @@
         },
         methods: {
             find: function () {
-                http.find(this, username).then((res) => {
-                    if (res.result) {
-                        this.correct = true;
-                        this.question = localStorage.question;
-
-
-                        http.correct(this, username).then((res) => {
-                            if (res.result) {
-                                 res.question = this.newquestion
-                                res.answer = this.newanswer
-                                this.$store.state.S.isfind = false;
-                                this.$store.state.S.islogin = true
+                console.log(this.username)
+                http.find(this,this.username).then((res) => {
+                    if (res.data.result) {
+                        http.correct(this,this.username).then((res) => {
+                            if (res.data.result) {
+                                console.log(res)
                             }else {
-                                alert(res.msg)
+                                alert(res.data.msg)
                             }
                         })
                     } else {
@@ -65,16 +59,15 @@
                     }
                 })
             },
-            correct:function(that,username,password,question,answer) {
-                http.update(this,username,password,question,answer).then((res)=>{
-                    if (res.result) {
-                        localStorage.username = res.user;
-                        localStorage.password = res.password
-                        localStorage.question = res.question;
+            modification:function() {
+                http.update(this,this.username,this.password,this.question,this.answer).then((res)=>{
+                    if (res.data.result) {
+                        console.log(res)
+                        localStorage.username = this.username;
                         this.$store.state.S.isfind = false;
                         this.$store.state.S.islogin = true
                     }else {
-                        alert(res.msg)
+                        alert(res.data.msg)
                     }
                 })
             },

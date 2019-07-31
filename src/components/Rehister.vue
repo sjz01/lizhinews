@@ -18,7 +18,7 @@
         <div class="answer">
             <input type="password" placeholder="给你苦思冥想的密码一个答案吧！" v-model="answer">
         </div>
-        <button class="btn" @click="register(this,username,password,question,answer)">注册</button>
+        <button class="btn" @click="register">注册</button>
     </div>
 </template>
 
@@ -35,17 +35,16 @@
             }
         },
         methods:{
-            register:function (that,username,password,question,answer) {
-                http.register(this,username,password,question,answer).then((res)=>{
-                    if (res.result){
+            register:function () {
+                http.register(this,this.username,this.password,this.question,this.answer).then((res)=>{
+                    if (res.data.result){
+                        console.log(res)
+                        localStorage.username = this.username
                         this.$store.state.S.isregister=false;
                         this.$store.state.S.isme = true;
-                        localStorage.question = res.question;
-                        localStorage.answer = res.answer;
-                        localStorage.username = res.user;
-                        localStorage.password = res.password;
                     } else {
-                        alert(res.msg);
+                        console.log(res.data.msg)
+
                     }
                 })
             },

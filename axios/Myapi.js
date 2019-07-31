@@ -51,7 +51,6 @@ function type(vue,title,) {
 
 
 function details(vue,id) {
-    console.log(id)
     var myid = id
     var param = new URLSearchParams();
     param.append("showapi_appid", APID);

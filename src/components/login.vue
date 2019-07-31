@@ -34,14 +34,12 @@
         methods: {
             login: function () {
                 http.login(this,this.username,this.password).then((res)=>{
-                    if (res.result) {
+                    if (res.data.result) {
+                        localStorage.username = this.username
                         this.$store.state.S.islogin = false;
                         this.$store.state.S.isme = true;
-                        localStorage.username = res.user;
-                        localStorage.password = res.password;
-
                     } else {
-                        alert(res.msg);
+                        alert(res.data.msg);
                     }
                 })
             },
