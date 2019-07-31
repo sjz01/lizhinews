@@ -1,14 +1,17 @@
 <template>
     <div id="Dipc">
-         <swiper      :options="swiperOption" ref="mySwiper"  id="swiper">
+         <swiper    v-if="!$store.state.AI.islupo"    :options="swiperOption" ref="mySwiper"  id="swiper">
                 <!-- slides -->
                 <swiper-slide  v-for="(item,key) in list" :key="key"  v-if="item.imageurls.length > 1">
-                    <div > 
-                      <img class="Wimg" :src="item.imageurls[0].url" alt=""></div>
+                    <div @click="lupo(item.id)"> 
+                      <img class="Wimg" :src="item.imageurls[0].url" alt="" ></div>
                 </swiper-slide>
                
                 <!-- Optional controls -->
          </swiper>
+          <div v-if="$store.state.AI.islupo">
+            <Datails />
+          </div>
     </div>
 </template>
 
@@ -16,14 +19,15 @@
 import 'swiper/dist/css/swiper.css'
 import http from '../../axios/Myapi'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
-
+import Datails from "./Details"
 
 
 export default {
     name:"Dipc",
     components: {
     swiper,
-    swiperSlide
+    swiperSlide,
+    Datails
   },
   data() {
     return {
@@ -46,6 +50,17 @@ export default {
         }
       }
   },
+  methods:{
+        lupo: function(id){
+         this.$store.state.DAI.Newsid = id;
+         this.$store.state.AI.islupo = true;
+         this.$store.state.AI.isNav = true;
+
+         console.log(this.$store.state.AI.islupo)
+        }
+  },
+
+
    computed: {
       swiper() {
         return this.$refs.mySwiper.swiper
@@ -59,7 +74,7 @@ export default {
                     this.list = res.data.showapi_res_body.pagebean.contentlist;
                     // console.log(this.list)
 
-                })  
+              })  
     },
 
 }

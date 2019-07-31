@@ -31,6 +31,7 @@ import http from '../../axios/Myapi'
             isdetails:function () {
                 this.$store.state.S.isdetails = false;
                 this.$store.state.DAI.isnews= true;
+                this.$store.state.AI.islupo = false;
             }
         },
         created() {
@@ -52,7 +53,7 @@ import http from '../../axios/Myapi'
             // position: fixed;
             top: 0px;
             background-color: #fff;
-            z-index: 10;
+            z-index: 110;
             font-size: 16px;
             text-align: left;
       

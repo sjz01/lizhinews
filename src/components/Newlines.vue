@@ -1,17 +1,19 @@
 <template>
-    <div id="newlines">
-    <div v-if="!$store.state.AI.isInfo">
-        <Navbar />
-        <!-- 顶部样式 没有加滑动效果 -->
-        <div v-if="$store.state.AI.isData">
-        <div id="Topbar" >
-        <router-link   tag="span" to=""  v-for="(item,key) in $store.state.S.arr" :key="key"><span :class="activekey == key ? redColor : ''" @click="isNew(item.id,item.content,key)">{{item.content}}</span></router-link>
-        </div>
-
+<div id="newlines" >
+    <div v-if="(!$store.state.AI.isInfo)">
+            <div v-if="!$store.state.AI.islupo" >          
+                <Navbar />
+                <!-- 顶部样式 没有加滑动效果 -->
+                <div v-if="$store.state.AI.isData">
+                <div id="Topbar" >
+                <router-link   tag="span" to=""  v-for="(item,key) in $store.state.S.arr" :key="key"><span :class="activekey == key ? redColor : ''" @click="isNew(item.id,item.content,key)">{{item.content}}</span></router-link>
+                </div>
+                </div> 
         <!-- 轮播图 -->
+            </div>
         <Dipc />
         <!-- <news /> -->
-    </div>
+         
           <div id="news">
         <ul  class="listul" v-for="(item,key) in list" :key="key" v-if="!$store.state.AI.isInfo" >
                
@@ -25,7 +27,10 @@
                 </li>
             </ul>
             <!-- 底部导航栏 -->
-            <Tabbar />
+            <div  v-if="!$store.state.AI.islupo">
+                <Tabbar />
+            </div>
+            
            </div>
         </div>
              <!-- 底下是详情页 -->
@@ -83,8 +88,9 @@ export default {
         },
         isinfo(id){
             this.$store.state.AI.isInfo = true;
-           
-          http.details(this,id).then((res)=>{
+           this.$store.state.AI.newsId = id;
+          http.details(this,this.$store.state.AI.newsId).then((res)=>{
+              
                this.title = res.data.showapi_res_body.pagebean.contentlist[0].title;
       
                 this.allList = res.data.showapi_res_body.pagebean.contentlist[0].allList;

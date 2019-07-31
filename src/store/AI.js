@@ -6,4 +6,6 @@ export default{
     isData:true,
     content:"",
     newsid:'',
+    islupo:false,
+    isNav:false,
 }
