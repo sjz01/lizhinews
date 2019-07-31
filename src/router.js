@@ -14,7 +14,7 @@ export default new Router({
       {
         path:"/Details",
         name:"Details",
-        comments:() =>import("./components/Details.vue")
+        component:() =>import("./components/Details.vue")
     },
         
     

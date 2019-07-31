@@ -9,4 +9,7 @@ export default{
     islupo:false,
     isNav:false,
     OnlyNav:true,
+    Navinfo:true,
+    Liinfo:true,
+    
 }

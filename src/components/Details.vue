@@ -7,11 +7,15 @@
         </div>
 
         <!-- 正文 -->
-                     <p class="title">{{title}}</p>
+
+                    <div >
+                        <p class="title">{{title}}</p>
                         <div  v-for="(item,key) in allList" :key="key" class="content">
                               <img  v-if="item.url" :src=item.url alt="">
                             <p v-if="item.length>3" class="text">{{item}}</p>
                         </div>
+                    </div>
+                     
     </div>
 </template>
 
@@ -51,6 +55,7 @@ import http from '../../axios/Myapi'
             width: 100%;
             height: 100%;
             // position: fixed;
+            position: relative;
             top: 0px;
             background-color: #fff;
             z-index: 110;
@@ -87,6 +92,7 @@ import http from '../../axios/Myapi'
              .content{
             width: 90%;
             margin: 0 auto;
+            margin:10px 18px;
                
 
                 img{

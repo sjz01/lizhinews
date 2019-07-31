@@ -2,7 +2,7 @@
     
         <div id="news">
             <div>
-                     <Navbar v-if="$store.state.DAI.isnews"/>
+                     <Navbar/>
             <div class="toplist" v-if="$store.state.DAI.isnews">
                 <ul v-for="(item,key) in arr" :key="key" @click="isdetails(item.id)">
                     <li class="one">{{item.title}}<p>{{item.pubDate}} <span>{{item.source}}</span></p>
