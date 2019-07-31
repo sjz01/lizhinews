@@ -8,4 +8,5 @@ export default{
     newsid:'',
     islupo:false,
     isNav:false,
+    OnlyNav:true,
 }

@@ -4,8 +4,8 @@
 const BASEURL = 'https://route.showapi.com';
 const TYPE_PATH = '/109-35';
 const NEWS_PATH = '/109-34';
-const APID = "101288";
-const SING = "12898b976ad74fb5a1b1fa4330e240f5"
+const APID = "100961";
+const SING = "3436efd8c7304e8d9265a17599b7f8f2"
 
 // const TLJYURL = 'http://123.56.195.82:9999'
 const REGISTER_PATH = '/api/register'

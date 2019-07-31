@@ -1,25 +1,34 @@
 <template>
 <div id="newlines" >
     <div v-if="(!$store.state.AI.isInfo)">
+           
             <div v-if="!$store.state.AI.islupo" >          
                 <Navbar />
-                <!-- 顶部样式 没有加滑动效果 -->
-                <div v-if="$store.state.AI.isData">
-                <div id="Topbar" >
-                <router-link   tag="span" to=""  v-for="(item,key) in $store.state.S.arr" :key="key"><span :class="activekey == key ? redColor : ''" @click="isNew(item.id,item.content,key)">{{item.content}}</span></router-link>
-                </div>
-                </div> 
-        <!-- 轮播图 -->
-            </div>
-        <Dipc />
-        <!-- <news /> -->
-         
-          <div id="news" v-if="!$store.state.AI.islupo">
-                    <ul  class="listul" v-for="(item,key) in list" :key="key" v-if="!$store.state.AI.isInfo" >
+                <div class="NvaBar" v-if="$store.state.AI.OnlyNav">
 
-                        <li class="one" @click="isinfo(item.id)" >{{item.title}}<p>{{item.pubDate}} <span>{{item.source}}</span></p>
+               
+                <!-- 顶部样式 没有加滑动效果 -->
+                        <div v-if="$store.state.AI.isData">
+                            <div id="Topbar" >
+                            <router-link   tag="span" to=""  v-for="(item,key) in $store.state.S.arr" :key="key"><span :class="activekey == key ? redColor : ''" @click="isNew(item.id,item.content,key)">{{item.content}}</span></router-link>
+                            </div>
+                        </div> 
+        <!-- 轮播图 -->
+            
+           
+                <Dipc />
+                </div>  
+             </div>
+             
+        <!-- <news /> -->
+             <div class="NvaBar" v-if="$store.state.AI.OnlyNav">
+
+                <div id="news" v-if="!$store.state.AI.islupo">
+                      <ul  class="listul" v-for="(item,key) in list" :key="key" v-if="!$store.state.AI.isInfo" >
+
+                         <li class="one" @click="isinfo(item.id)" >{{item.title}}<p>{{item.pubDate}} <span>{{item.source}}</span></p>
                             
-                            <li v-if="item.imageurls.length > 1">
+                              <li v-if="item.imageurls.length > 1">
                                 
                                     <img :src="item.imageurls[0].url" alt="">
                                 
@@ -28,30 +37,32 @@
                     </ul>
             <!-- 底部导航栏 -->
             
-                <Tabbar />
-             </div>
+                                <Tabbar />
+                </div>
             
-          
+            </div>
         </div>
 
 
              <!-- 底下是详情页 -->
             
              
-                
-                    <div id="details" v-if="$store.state.AI.isInfo">
-                        <div class="nav">
-                            <div @click="isdetails">&#xe60e;</div>
-                            <div>新闻详情</div>
-                            <div>&#xe60f;</div>
-                        </div>
-                        <p class="title">{{title}}</p>
-                        <div  v-for="(item,key) in allList" :key="key" class="content">
-                              <img  v-if="item.url" :src=item.url alt="">
-                            <p v-if="item.length>3" class="text">{{item}}</p>
+                    <div  v-if="$store.state.AI.OnlyNav">
+
+                   
+                        <div id="details" v-if="$store.state.AI.isInfo">
+                            <div class="nav">
+                                <div @click="isdetails">&#xe60e;</div>
+                                <div>新闻详情</div>
+                                <div>&#xe60f;</div>
+                            </div>
+                            <p class="title">{{title}}</p>
+                            <div  v-for="(item,key) in allList" :key="key" class="content">
+                                <img  v-if="item.url" :src=item.url alt="">
+                                <p v-if="item.length>3" class="text">{{item}}</p>
+                            </div>
                         </div>
                     </div>
-                     
         </div>
 </template>
 
@@ -104,9 +115,7 @@ export default {
 
             //   console.log(this.list);
           })
-            http.type(this,id).then((res)=>{
-                // console.log(res);
-            })
+         
         }
      
   },
