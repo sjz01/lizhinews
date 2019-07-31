@@ -4,11 +4,8 @@
             <div class="pic">
                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564244949149&di=0dcc0781b40a6734883e8478367caa49&imgtype=0&src=http%3A%2F%2Fwww.xinhuanet.com%2Fbook%2F2019-01%2F28%2F1210048977_15486377793141n.jpg" alt="">
             </div>
-            <div class="nike" v-if="$store.state.S.isnike">
-                鲁迅
-            </div>
-            <div class="nike" v-if="!$store.state.S.isnike" @click="islogin">
-                请先登录
+            <div class="nike">
+            {{name}}
             </div>
         </div>
         <div class="content">
@@ -28,15 +25,19 @@
             <div><span>用户反馈</span></div>
             <div><span>系统设置</span></div>
         </div>
+        <div class="nologin" @click="nologin">
+            注销登录
+        </div>
     </div>
 </template>
 
 <script>
+    import http from '../../axios/Myapi'
     export default {
         name: "Me",
         data:function () {
             return{
-
+                name:''
             }
         },
         methods:{
@@ -47,14 +48,23 @@
           iscollect:function () {
             this.$store.state.S.iscollect = true;
             this.$store.state.S.isme = false;
+          },
+          nologin:function () {
+              localStorage.clear();
+              this.$store.state.S.isme = false;
+              this.$store.state.S.islogin = true;
           }
         },
         created() {
-            if (localStorage.username =='admin' && localStorage.password=='admin'){
-                this.$store.state.S.nike =true
-            } else {
-                this.$store.state.S.nike =false
-            }
+            // localStorage.clear()
+            console.log(localStorage.username)
+          if (localStorage.username) {
+              this.name = localStorage.username;
+          } else {
+              this.$store.state.S.isme = false;
+              this.$store.state.S.islogin = true;
+          }
+
         }
     }
 </script>
@@ -63,7 +73,7 @@
     #me{
         width: 100%;
         height: 100%;
-        background-color: #cccccc;
+        background-color: #F2EFE6;
 
         .nav{
             width: 100%;
@@ -104,7 +114,6 @@
                     font-size: 18px;
                 }
                 p:nth-of-type(2){
-                    color: white;
                     font-size: 18px;
                 }
             }
@@ -132,6 +141,15 @@
             div:nth-of-type(2){
                 border-bottom:1px solid white;
             }
+        }
+        .nologin{
+            width: 80%;
+            height: 60px;
+            border: 1px solid rgb(165, 46, 46);
+            margin: 20px auto 80px;
+            border-radius: 40px;
+            font-size: 18px;
+            line-height: 60px;
         }
     }
 </style>

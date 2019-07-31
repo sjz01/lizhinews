@@ -6,55 +6,47 @@
                 <span @click="islogin">&#xe60e;</span>
             </div>
         </div>
-        <!-- <div class="pic">
-            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564244949149&di=0dcc0781b40a6734883e8478367caa49&imgtype=0&src=http%3A%2F%2Fwww.xinhuanet.com%2Fbook%2F2019-01%2F28%2F1210048977_15486377793141n.jpg" alt="">
-        </div> -->
         <div class="username">
-            <span>&#xe620;</span>
-            <input type="text" placeholder="请输入用户名" v-model="username">
+            <input type="text" placeholder="请输入用户名" v-model="username" maxlength="20">
         </div>
         <div class="password">
-            <span>&#xe63b;</span>
-            <input type="password" placeholder="请输入密码" v-model="password">
+            <input type="password" maxlength="20" placeholder="请输入密码" v-model="password">
         </div>
-        <select name="" id="">
-            <option value="你喜欢的水果">你喜欢的水果</option>
-            <option value="你的生日">你的生日</option>
-            <option value="你喜欢吃的零食">你喜欢吃的零食</option>
-            <option value="你最喜欢的动物">你最喜欢的动物</option>
-            <option value="你小学老师的名字">你小学老师的名字</option>
-            <option value="对你影响最深的人">对你影响最深的人</option>
-        </select>
-        <div class="password">
-            <span>&#xe63b;</span>
-            <input type="password" placeholder="请确认密码" v-model="repeat">
+       <div class="question">
+           <input type="text" placeholder="定义一个问题吧！" v-model="question">
+       </div>
+        <div class="answer">
+            <input type="password" placeholder="给你苦思冥想的密码一个答案吧！" v-model="answer">
         </div>
         <button class="btn" @click="register">注册</button>
     </div>
 </template>
 
 <script>
+    import http from "../../axios/Myapi";
     export default {
         name: "Rehister",
         data:function () {
             return{
                 username:'',
                 password:'',
-                repeat:''
+                question:'',
+                answer:''
             }
         },
         methods:{
             register:function () {
-                if (this.username&&this.password&&this.repeat&&this.password==this.repeat) {
-                    localStorage.username = this.username;
-                    localStorage.password = this.password;
-                    this.$store.state.S.isnike = true;
-                    this.$store.state.S.isregister=false;
-                    this.$store.state.S.islogin = false;
-                    this.$store.state.S.isme = true;
-                } else {
-                    alert('账户或者密码不正确！！')
-                }
+                http.register(this,this.username,this.password,this.question,this.answer).then((res)=>{
+                    if (res.data.result){
+                        console.log(res)
+                        localStorage.username = this.username
+                        this.$store.state.S.isregister=false;
+                        this.$store.state.S.isme = true;
+                    } else {
+                        console.log(res.data.msg)
+
+                    }
+                })
             },
             islogin:function () {
                 this.$store.state.S.isregister=false;
@@ -68,7 +60,7 @@
 #rehister{
     width: 100%;
     height: 100%;
-    background-color: #cccccc;
+    background-color: #F2EFE6;
     position: fixed;
     top: 0;
     z-index: 10;
@@ -95,84 +87,79 @@ span{
 }
     
     .username{
-        width: 70%;
-        height: 50px;
+        width: 80%;
+        height: 40px;
         margin: 30px auto;
-        background-color: white;
-        display: flex;
-        align-items: center;
-        border-radius: 20px;
+        background-color: #F2EFE6;
+        border-bottom: 1px solid black;
 
-        span{
-            font-family: "Myfont";
-            font-size: 20px;
-            margin-left:10px;
-            margin-right: 10px;
-            display: inline-block;
-            height: 100%;
-            width: 50px;
-            text-align: center;
-            line-height: 50px;
-            float: left;
-        }
         input{
-            width: 170px;
-            display: inline-block;
-            float: left;
+            width: 100%;
+            height: 100%;
             border: 0px;
-            font-size: 20px;
+            font-size: 18px;
             outline:none;
+            background-color: #F2EFE6;
         }
     }
-    select {
-      width: 70%;
-      color: #666;
-      height: 50px;
-      background-color: white;
-      border-radius: 20px;
-      font-size: 19px;
-    //   margin-left: 26px;
+    .question{
+        width: 80%;
+        height: 40px;
+        margin: 30px auto;
+        background-color: #F2EFE6;
+        border-bottom: 1px solid black;
+
+        input{
+            width: 100%;
+            height: 100%;
+            border: 0px;
+            font-size: 18px;
+            outline:none;
+            background-color: #F2EFE6;
+        }
     }
+    .answer{
+        width: 80%;
+        height: 40px;
+        margin: 30px auto;
+        background-color: #F2EFE6;
+        border-bottom: 1px solid black;
+
+        input{
+            width: 100%;
+            height: 100%;
+            border: 0px;
+            font-size: 18px;
+            outline:none;
+            background-color: #F2EFE6;
+        }
+    }
+
     .password{
-        width: 70%;
-        height: 50px;
+        width: 80%;
+        height: 40px;
         margin: 30px auto;
-        background-color: white;
-        display: flex;
-        align-items: center;
-        border-radius: 20px;
+        background-color: #F2EFE6;
+        border-bottom: 1px solid black;
 
-        span{
-            font-family: "pwdFont";
-            font-size: 20px;
-            margin-left:10px;
-            margin-right: 10px;
-            display: inline-block;
-            height: 100%;
-            width: 50px;
-            text-align: center;
-            line-height: 50px;
-            float: left;
-        }
         input{
-            width: 170px;
-            display: inline-block;
-            float: left;
+            width: 100%;
+            height: 100%;
             border: 0px;
-            font-size: 20px;
+            font-size: 18px;
             outline:none;
+            background-color: #F2EFE6;
         }
     }
     .btn{
-        width: 70%;
+        width: 80%;
         height: 60px;
         margin: 20px auto 0;
-        background-color: rgb(165, 46, 46);
+        background-color: #F2EFE6;
         border-radius: 20px;
-        border: 0;
+        border: 1px solid rgb(165, 46, 46);
         outline: none;
-        font-size: 26px;
-        color: white;
+        font-size: 20px;
         margin-bottom: 70px;
     }
 }

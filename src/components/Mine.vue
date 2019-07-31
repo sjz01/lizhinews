@@ -5,10 +5,12 @@
         <Rehister v-if="$store.state.S.isregister"/>
         <Find v-if="$store.state.S.isfind"/>
         <collect v-if="$store.state.S.iscollect"/>
+        <Tabar />
     </div>
 </template>
 
 <script>
+    import Tabar from './Tabar'
     import Me from './Me'
     import Login from './login'
     import Rehister from './Rehister'
@@ -17,7 +19,7 @@
     export default {
         name: "Mine",
         components:{
-            Me,Login,Rehister,Find,collect
+            Me,Login,Rehister,Find,collect,Tabar
         },
         data () {
             return{
