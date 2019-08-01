@@ -12,7 +12,7 @@
         <div class="content">
 
 
-            <ul class="inner" v-for="(item,key) in content" :key="key" @click="dj(item.id)">
+            <ul class="inner" v-for="(item,key) in $store.state.S.content" :key="key" @click="dj(item.id)">
                 <li class="inner1">{{item.url}}</li>
                 <li class="inner2">
                     {{item.title}}
@@ -48,14 +48,15 @@
                 this.$store.state.DAI.Newsid = id;
                 this.$store.state.S.iscect = false;
                 this.$store.state.S.isxq = true;
+
             }
         },
         created() {
             console.log(localStorage.username)
             http.getFavorite(this,localStorage.username,localStorage.password)
                 .then((res)=>{
-                    this.content = res.data.user[4].favorite
-                    console.log(res)
+                    this.$store.state.S.content = res.data.user[4].favorite
+                    console.log(this.$store.state.S.content)
                 })
         }
     }

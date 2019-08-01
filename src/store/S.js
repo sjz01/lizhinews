@@ -17,5 +17,6 @@ export default {
     isxq:false,
     isclick:true,
     issc:false,
-    isss:true
+    isss:true,
+    content:[]
 }

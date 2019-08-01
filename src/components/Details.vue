@@ -42,6 +42,14 @@ import http from '../../axios/Myapi'
                 this.$store.state.AI.islupo = false;
                 this.$store.state.S.iscect = true;
                 this.$store.state.S.isxq = false;
+
+                if (this.$store.state.S.iscect) {
+                    http.getFavorite(this,localStorage.username,localStorage.password)
+                        .then((res)=>{
+                            this.$store.state.S.content = res.data.user[4].favorite
+                            console.log(this.$store.state.S.content)
+                        })
+                }
             },
             updataFavorite: function (id, title, pubDate, source) {
                 console.log(id,title,pubDate,source, this.$store.state.S.favorite)
@@ -114,6 +122,20 @@ import http from '../../axios/Myapi'
                 this.allList = res.data.showapi_res_body.pagebean.contentlist[0].allList;
             //  console.log(res.data.showapi_res_body.pagebean.contentlist[0].content);
                 console.log(this.pubDate,this.source,this.title)
+
+                http.getFavorite(this, localStorage.username, localStorage.password)
+                    .then((res) => {
+                        console.log(res.data.user[4].favorite)
+                        res.data.user[4].favorite.forEach((item)=>{
+                            if (item.id == this.$store.state.DAI.Newsid ) {
+                                this.$store.state.S.issc = true;
+                                this.$store.state.S.isss = false;
+                            }else {
+                                this.$store.state.S.issc = false;
+                                this.$store.state.S.isss = true;
+                            }
+                        })
+                    })
             
             })
         }
