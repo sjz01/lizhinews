@@ -78,7 +78,7 @@ import http from '../../axios/Myapi'
                 font-family: 'myFont';
                 font-size: 20px;
                 color: #fff;
-                 margin-left: 20px;
+                 margin-left: 40px;
                 
             }
         }
