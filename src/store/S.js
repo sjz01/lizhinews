@@ -14,5 +14,8 @@ export default {
     obj:{},
     Jstring:null,
     iscect:true,
-    isxq:false
+    isxq:false,
+    isclick:true,
+    issc:false,
+    isss:true
 }

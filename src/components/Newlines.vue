@@ -52,7 +52,8 @@
             <div class="nav">
                 <div @click="isdetails">&#xe60e;</div>
                 <div>新闻详情</div>
-                <div @click="updataFavorite($store.state.AI.newsId,title,pubDate,source)">&#xe60f;</div>
+                <div class="wsc" @click="updataFavorite($store.state.AI.newsId,title,pubDate,source)"  v-if="$store.state.S.isss">&#xe60f;</div>
+                <div v-if="$store.state.S.issc" @click="nosc($store.state.AI.newsId)" class="ysc">&#xe611;</div>
             </div>
             <p class="title">{{title}}</p>
             <div v-for="(item,key) in allList" :key="key" class="content">
@@ -86,7 +87,8 @@
                 pubDate: '',
                 source: '',
                 arr:[],
-                jstring:''
+                jstring:'',
+
 
             }
         },
@@ -107,10 +109,27 @@
             isdetails: function () {
                 this.$store.state.AI.isInfo = false;
             },
+            nosc:function(id) {
+                this.$store.state.S.favorite.forEach((item,key)=>{
+                    if (item.id == id){
+                        this.$store.state.S.favorite.splice(key,1)
+                    }
+                })
+                this.jstring = JSON.stringify(this.$store.state.S.favorite)
+                http.updataFavorite(this, localStorage.username, localStorage.password, localStorage.question,localStorage.answer, this.jstring).then((res)=>{
+                    console.log(res)
+                })
+                    console.log(this.$store.state.S.issc,'-------------已经收藏')
+                http.getFavorite(this, localStorage.username, localStorage.password)
+                    .then((res) => {
+                        if (res.data.result){
+                            this.$store.state.S.issc = false;
+                            this.$store.state.S.isss = true;
+                        }
+                    })
+                console.log(this.$store.state.S.issc,'------------改变标识收藏')
+            },
             isinfo(id) {
-                // this.farr={id:id,title:title,url:url}
-                // this.$store.state.S.favorite.push(farr)
-
                 this.$store.state.AI.isInfo = true;
                 this.$store.state.AI.newsId = id;
                 http.details(this, this.$store.state.AI.newsId).then((res) => {
@@ -120,28 +139,44 @@
                     this.source = res.data.showapi_res_body.pagebean.contentlist[0].source
                     this.url = res.data.showapi_res_body.pagebean.contentlist[0].url
                     this.allList = res.data.showapi_res_body.pagebean.contentlist[0].allList;
-                    // console.log(res.data.showapi_res_body.pagebean.contentlist[0].allList);
-
-                    //   console.log(this.list);
+                   ;
                 })
-
-                // console.log(id)
-                // console.log(http);
-                // console.log(localStorage)
                 http.getFavorite(this, localStorage.username, localStorage.password)
                     .then((res) => {
                         if (res.data.user[4].favorite == null){
                             this.$store.state.S.favorite ==[]
                         } else {
                             this.$store.state.S.favorite = res.data.user[4].favorite
-                            console.log(this.$store.state.S.favorite)
+                            this.$store.state.S.favorite.forEach((item)=>{
+
+                                if (item.id == id){
+                                    this.$store.state.S.isss = false;
+                                    this.$store.state.S.issc = true;
+                                } else {
+                                    this.$store.state.S.issc = false;
+                                    this.$store.state.S.isss = true;
+                                }
+                            })
                         }
 
 
                     })
             },
             updataFavorite: function (id, title, pubDate, source) {
+                var i =false
                 if (localStorage.question || localStorage.answer || localStorage.username || localStorage.password) {
+
+                    // console.log( this.$store.state.S.favorite)
+                    this.$store.state.S.favorite.forEach((item)=>{
+                        if (item.id == id) {
+                            i =true;
+                            return
+                        }
+                    })
+                        if (i) {
+                            alert('已经收藏过了哦')
+                            return;
+                        }
                         this.$store.state.S.favorite.push({
                             id: id,
                             title: title,
@@ -150,17 +185,14 @@
                         })
                         // this.$store.state.S.favorite = [];
                         // 清空数据库我的收藏
-                    this.arr = [];
-                    this.$store.state.S.favorite.forEach((item)=>{
-                        if (this.arr.indexOf(item) == -1){
-                            this.arr.push(item)
-                        }
-                    })
-                        this.jstring = JSON.stringify(this.arr)
-                        console.log(this.jstring, '这是JSON字符串')
-                        console.log(localStorage.username,localStorage.password,localStorage.question,localStorage.answer,this.jstring)
+                    // this.$store.state.S.favorite=[]
+                        this.jstring = JSON.stringify(this.$store.state.S.favorite)
                         http.updataFavorite(this, localStorage.username, localStorage.password, localStorage.question, localStorage.answer, this.jstring).then((res) => {
                             console.log(res)
+                            if (res.data.result){
+                                this.$store.state.S.issc = true;
+                                this.$store.state.S.isss = false;
+                            }
                         })
                 } else {
                     alert('要注册才能收藏')
@@ -303,6 +335,22 @@
                 margin-left: 40px;
 
             }
+            .ysc{
+                flex-grow: 1;
+                font-family: 'ysc';
+                font-size: 20px;
+                color: #fff;
+                margin-left: 40px;
+            }
+            .wsc:active{
+                flex-grow: 1;
+                font-family: 'myFont';
+                font-size: 20px;
+                color: deepskyblue;
+                margin-left: 40px;
+            }
+
+
         }
 
         .title {

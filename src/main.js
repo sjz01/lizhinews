@@ -11,6 +11,7 @@ Vue.prototype.$axios = axios
 import '../public/reset.css'
 import '../public/Myfont.css'
 import '../public/pwdFont.css'
+import '../public/ysc.css'
 
 //引入swiper插件
 import VueAwesomeSwiper from 'vue-awesome-swiper'

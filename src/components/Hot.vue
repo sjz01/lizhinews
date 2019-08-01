@@ -47,11 +47,34 @@ export default {
       this.$store.state.S.isdetails = true;
       this.$store.state.DAI.Newsid = id;
       this.$store.state.DAI.isnews= false;
-      console.log(id);
+      console.log(id,this.$store.state.DAI.Newsid,'id++++++++++++++++++');
       http.details(this, id).then(res => {
         this.title = res.data.showapi_res_body.pagebean.contentlist[0].title;
         this.content =res.data.showapi_res_body.pagebean.contentlist[0].content;
       });
+
+
+
+        http.getFavorite(this, localStorage.username, localStorage.password)
+            .then((res) => {
+                if (res.data.user[4].favorite == null){
+                    this.$store.state.S.favorite ==[]
+                } else {
+                    this.$store.state.S.favorite = res.data.user[4].favorite
+                    this.$store.state.S.favorite.forEach((item)=>{
+
+                        if (item.id == id){
+                            this.$store.state.S.isss = false;
+                            this.$store.state.S.issc = true;
+                        } else {
+                            this.$store.state.S.issc = false;
+                            this.$store.state.S.isss = true;
+                        }
+                    })
+                }
+
+
+            })
     }
   },
   created() {

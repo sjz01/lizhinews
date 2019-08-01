@@ -88,6 +88,27 @@ export default {
                  console.log(res.data.showapi_res_body.pagebean.contentlist[0].allList);
 
             //   console.log(this.list);
+
+                 http.getFavorite(this, localStorage.username, localStorage.password)
+                     .then((res) => {
+                         if (res.data.user[4].favorite == null){
+                             this.$store.state.S.favorite ==[]
+                         } else {
+                             this.$store.state.S.favorite = res.data.user[4].favorite
+                             this.$store.state.S.favorite.forEach((item)=>{
+
+                                 if (item.id == id){
+                                     this.$store.state.S.isss = false;
+                                     this.$store.state.S.issc = true;
+                                 } else {
+                                     this.$store.state.S.issc = false;
+                                     this.$store.state.S.isss = true;
+                                 }
+                             })
+                         }
+
+
+                     })
           })
          
         },
