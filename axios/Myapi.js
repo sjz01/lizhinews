@@ -117,13 +117,13 @@ function  getFavorite(vue,username,password) {
     return vue.$axios.post(GFAVORITE_PATH,param)
 }
 
-function  updataFavorite(vue,username,password,question,answer,favorite) {
+function  updataFavorite(vue,username,password,question,answer,json) {
     var param = new URLSearchParams();
     param.append("userName", username);
     param.append("password", password);
     param.append("question", question);
     param.append("answer", answer);
-    param.append("favorite", favorite);
+    param.append("favorite", json);
     return vue.$axios.post(FAVORITE_PATH,param)
 }
 export default {

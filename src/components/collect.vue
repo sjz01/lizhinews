@@ -1,15 +1,18 @@
 <template>
     <div id="collect">
+        <div class="content" v-if="$store.state.S.iscect">
          <div class="nav">
+             <div class="incol">
             <div>
             收藏
             <span @click="iscollect">&#xe60e;</span>
             </div>
+             </div>
         </div>
         <div class="content">
 
 
-            <ul class="inner" v-for="(item,key) in content" :key="key">
+            <ul class="inner" v-for="(item,key) in content" :key="key" @click="dj(item.id)">
                 <li class="inner1">{{item.url}}</li>
                 <li class="inner2">
                     {{item.title}}
@@ -18,12 +21,19 @@
             </ul>
         </div>
     </div>
+        <Details v-if="$store.state.S.isxq"/>
+    </div>
+
 </template>
 
 <script>
     import http from '../../axios/Myapi'
+    import Details from './Details'
     export default {
         name: "collect",
+        components:{
+            Details
+        },
         data:function () {
             return {
                 content:[]
@@ -33,6 +43,11 @@
             iscollect:function () {
                 this.$store.state.S.iscollect = false;
                 this.$store.state.S.isme = true
+            },
+            dj:function (id) {
+                this.$store.state.DAI.Newsid = id;
+                this.$store.state.S.iscect = false;
+                this.$store.state.S.isxq = true;
             }
         },
         created() {
@@ -57,21 +72,26 @@
             position: fixed;
             top: 0;
             z-index: 999;
-            div{
-                width: 100%;
-                height: 100%;
-                font-size: 30px;
-                text-align: center;
-                line-height: 80px;
-                color: white;
-                span{
-                    font-family: 'Myfont';
-                    margin-left: 10px;
-                    font-size: 26px;
-                    float: left;
+            .incol{
+                width: 90%;
+                margin: 0 auto;
+                /*background: #000;*/
+                div{
+                    width: 100%;
                     height: 100%;
+                    font-size: 30px;
+                    text-align: center;
+                    line-height: 80px;
+                    color: white;
+                    span{
+                        font-family: 'Myfont';
+                        font-size: 26px;
+                        float: left;
+                        height: 100%;
+                    }
                 }
             }
+
         }
         .inner{
             width: 95%;

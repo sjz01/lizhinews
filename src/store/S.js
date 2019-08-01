@@ -12,5 +12,7 @@ export default {
     iscollect:false,
     favorite:[],
     obj:{},
-    Jstring:null
+    Jstring:null,
+    iscect:true,
+    isxq:false
 }

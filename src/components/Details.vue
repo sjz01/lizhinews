@@ -36,6 +36,8 @@ import http from '../../axios/Myapi'
                 this.$store.state.S.isdetails = false;
                 this.$store.state.DAI.isnews= true;
                 this.$store.state.AI.islupo = false;
+                this.$store.state.S.iscect = true;
+                this.$store.state.S.isxq = false;
             }
         },
         created() {

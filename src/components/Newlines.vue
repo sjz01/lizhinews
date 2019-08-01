@@ -158,8 +158,7 @@
                     })
                         this.jstring = JSON.stringify(this.arr)
                         console.log(this.jstring, '这是JSON字符串')
-                        console.log(this.arr, '这是S')
-                        console.log(localStorage.username)
+                        console.log(localStorage.username,localStorage.password,localStorage.question,localStorage.answer,this.jstring)
                         http.updataFavorite(this, localStorage.username, localStorage.password, localStorage.question, localStorage.answer, this.jstring).then((res) => {
                             console.log(res)
                         })
