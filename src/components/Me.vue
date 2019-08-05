@@ -2,7 +2,7 @@
     <div id="me">
         <div class="nav">
             <div class="pic">
-                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564244949149&di=0dcc0781b40a6734883e8478367caa49&imgtype=0&src=http%3A%2F%2Fwww.xinhuanet.com%2Fbook%2F2019-01%2F28%2F1210048977_15486377793141n.jpg" alt="">
+                <img src="../../public/img/6FE8ADEE0932903E8A53CE59783D4E95.png" alt="">
             </div>
             <div class="nike">
             {{name}}

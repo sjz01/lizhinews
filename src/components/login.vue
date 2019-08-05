@@ -3,7 +3,7 @@
         <div class="nav">
             <div>
                 登录
-                <span @click="isme">&#xe60e;</span>
+                <router-link tag="span" to="/">&#xe60e;</router-link>
             </div>
         </div>
         <div class="content">
@@ -49,10 +49,10 @@
                 this.$store.state.S.isregister = true;
                 this.$store.state.S.islogin = false;
             },
-            isme: function () {
-                this.$store.state.S.islogin = false;
-                this.$store.state.S.isme = true
-            },
+            // isme: function () {
+            //     this.$store.state.S.islogin = false;
+            //     this.$store.state.S.isme = true
+            // },
             find: function () {
                 this.$store.state.S.isfind = true;
                 this.$store.state.S.islogin = false;

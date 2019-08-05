@@ -8,14 +8,14 @@ const APID = "100961";
 const SING = "3436efd8c7304e8d9265a17599b7f8f2";
 
 
-// const TLJYURL = 'http://123.56.195.82:9999'
-const REGISTER_PATH = '/api/register'
-const LOGIN_PATH = '/api/login'
-const FIND_PATH = '/api/existUser'
-const CORRCET_PATH = '/api/getInfo'
-const PASSWORD_PATH='/api/updatePassword'
-const FAVORITE_PATH = '/api/updateFavorite'
-    const GFAVORITE_PATH = '/api/getFavorite'
+const TLJYURL = 'http://123.56.195.82:9999'
+const REGISTER_PATH = '/register'
+const LOGIN_PATH = '/login'
+const FIND_PATH = '/existUser'
+const CORRCET_PATH = '/getInfo'
+const PASSWORD_PATH='/updatePassword'
+const FAVORITE_PATH = '/updateFavorite'
+    const GFAVORITE_PATH = '/getFavorite'
 
 
 
@@ -72,7 +72,7 @@ function register(vue,username,password,question,answer) {
     param.append("question", question);
     param.append("answer", answer);
     param.append("favorite", null);
-    return vue.$axios.post(REGISTER_PATH,param)
+    return vue.$axios.post(TLJYURL+REGISTER_PATH,param)
 }
 
 function login(vue,username,password) {
@@ -80,7 +80,7 @@ function login(vue,username,password) {
     param.append("userName", username);
     param.append("password", password);
     param.append("favorite", null);
-    return vue.$axios.post(LOGIN_PATH,param)
+    return vue.$axios.post(TLJYURL+LOGIN_PATH,param)
 }
 
 
@@ -88,14 +88,14 @@ function find(vue,username) {
     var param = new URLSearchParams();
     param.append("userName", username);
     param.append("favorite", null);
-    return vue.$axios.post(FIND_PATH,param)
+    return vue.$axios.post(TLJYURL+FIND_PATH,param)
 }
 
 function correct(vue,username) {
     var param = new URLSearchParams();
     param.append("userName", username);
     param.append("favorite", null);
-    return vue.$axios.post(CORRCET_PATH,param)
+    return vue.$axios.post(TLJYURL+CORRCET_PATH,param)
 }
 
 
@@ -106,7 +106,7 @@ function update(vue,username,password,question,answer) {
     param.append("question", question);
     param.append("answer", answer);
     param.append("favorite", null);
-    return vue.$axios.post(PASSWORD_PATH,param)
+    return vue.$axios.post(TLJYURL+PASSWORD_PATH,param)
 }
 
 function  getFavorite(vue,username,password) {
@@ -114,7 +114,7 @@ function  getFavorite(vue,username,password) {
     param.append("userName", username);
     param.append("password", password);
     param.append("favorite", null);
-    return vue.$axios.post(GFAVORITE_PATH,param)
+    return vue.$axios.post(TLJYURL+GFAVORITE_PATH,param)
 }
 
 function  updataFavorite(vue,username,password,question,answer,json) {
@@ -124,7 +124,7 @@ function  updataFavorite(vue,username,password,question,answer,json) {
     param.append("question", question);
     param.append("answer", answer);
     param.append("favorite", json);
-    return vue.$axios.post(FAVORITE_PATH,param)
+    return vue.$axios.post(TLJYURL+FAVORITE_PATH,param)
 }
 export default {
     news,type,Allnews,details,register,login,find,correct,update,updataFavorite,getFavorite
