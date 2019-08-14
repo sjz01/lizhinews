@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'pwdFont';
+    src: url('./_font/iconfont.eot');
+    src: url('./_font/iconfont.eot?#iefix') format('embedded-opentype'),
+    url('./_font/iconfont.woff2') format('woff2'),
+    url('./_font/iconfont.woff') format('woff'),
+    url('./_font/iconfont.ttf') format('truetype'),
+    url('./_font/iconfont.svg#iconfont') format('svg');
+}

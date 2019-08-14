@@ -1,0 +1,224 @@
+<template>
+    <div id="mine">
+        <!--        个人信息页面-->
+        <div class="div">
+            <div class="item" v-if="num">
+                <div class="itema">
+                    <img src="http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg" alt="">
+                </div>
+                <div class="itemb">
+                    <p>Admin</p>
+                </div>
+            </div>
+            <div class="item" v-if="!num">
+                <div class="itema">
+                    <img src="https://p0.ssl.qhimgs1.com/sdr/400__/t01a6aa63ec1979d394.jpg" alt="">
+                </div>
+                <router-link class="itemb" tag="div" to="/mine/login">
+                    <p>请先登录</p>
+                </router-link>
+            </div>
+            <ul class="three">
+                <li>
+                    <p>&#xe60f;</p>
+                    <p>收藏</p>
+                </li>
+                <li>
+                    <p>&#xe718;</p>
+                    <p>历史</p>
+                </li>
+                <li>
+                    <p>&#xe670;</p>
+                    <p>消息</p>
+                </li>
+            </ul>
+            <ul class="fruo">
+                <li>我要爆料</li>
+                <li>用户反馈</li>
+                <li>系统设置</li>
+            </ul>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: "Mine",
+        data () {
+            return{
+                num:false,
+                username:'',
+                password:'',
+                login:false,
+            }
+        },
+        methods:{
+
+        },
+        created() {
+            localStorage.clear()
+            if (localStorage.username&&localStorage.password){
+                this.num=true;
+            }
+        }
+    }
+</script>
+
+<style lang="less" scoped>
+    #mine{
+        width: 100%;
+        height: 100%;
+
+        .item{
+            height: 100px;
+            width: 100%;
+            background-color: #222222;
+            border-bottom: #cccccc;
+            border-top: #cccccc;
+            display: flex;
+            align-items: center;
+            .itema{
+                height: 80%;
+                width: 25%;
+                border:1px solid white;
+                border-radius: 50%;
+                overflow: hidden;
+                margin: 5px;
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .itemb{
+                height: 80%;
+                width: 70%;
+                margin: 5px;
+                line-height: 80px;
+                color: white;
+            }
+        }
+        .three{
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 5px solid #cccccc;
+            li{
+                float: left;
+                font-family: 'Myfont';
+                flex-grow: 1;
+            }
+        }
+        .fruo{
+            width: 100%;
+            li{
+                width: 90%;
+                height: 50px;
+                margin-left: 10%;
+                text-align: left;
+                line-height: 50px;
+            }
+            li:nth-of-type(1) {
+                border-bottom: 1px solid #cccccc;
+            }
+            li:nth-of-type(2) {
+                border-bottom: 1px solid #cccccc;
+            }
+        }
+        .rehister{
+            border: 1px solid white;
+            font-size: 24px;
+            color:#990055;
+        }
+    }
+    /*.div{*/
+    /*    width: 100%;*/
+    /*    height: 100%;*/
+    /*}*/
+    /*.rehister{*/
+    /*    width: 90%;*/
+    /*    margin: 10% auto;*/
+    /*    overflow: hidden;*/
+    /*}*/
+    /*.rehister ul{*/
+    /*    float: left;*/
+    /*}*/
+    /*.rehister ul:nth-of-type(1){*/
+    /*    width: 30%;*/
+    /*}*/
+    /*.rehister ul:nth-of-type(2){*/
+    /*    width: 70%;*/
+    /*}*/
+    /*.rehister li{*/
+    /*    width: 100%;*/
+    /*    height: 50px;*/
+    /*    line-height: 50px;*/
+    /*    text-align: center;*/
+    /*    margin: 20px 0;*/
+    /*    font-size: 20px;*/
+    /*}*/
+    /*.rehister li input{*/
+    /*    width: 90%;*/
+    /*    height: 40px;*/
+    /*}*/
+    /*.rehister button{*/
+    /*    width: 100%;*/
+    /*    height: 40px;*/
+    /*    background-color: deepskyblue;*/
+    /*    margin-top: 80px;*/
+    /*    font-size: 20px;*/
+    /*    color: greenyellow;*/
+    /*}*/
+    /*.login{*/
+    /*    width: 90%;*/
+    /*    margin: 30% auto;*/
+    /*    overflow: hidden;*/
+    /*    ul{*/
+    /*        float: left;*/
+
+
+    /*    }*/
+    /*}*/
+    /*.login ul:nth-of-type(1){*/
+    /*    width: 30%;*/
+    /*}*/
+    /*.login ul:nth-of-type(2){*/
+    /*    width: 70%;*/
+    /*}*/
+    /*.login li input{*/
+    /*    width: 90%;*/
+    /*    height: 40px;*/
+    /*}*/
+    /*.login li input{*/
+    /*    width: 90%;*/
+    /*    height: 40px;*/
+    /*}*/
+    /*.login li{*/
+    /*    width: 100%;*/
+    /*    height: 50px;*/
+    /*    line-height: 50px;*/
+    /*    text-align: center;*/
+    /*    margin: 20px 0;*/
+    /*    font-size: 20px;*/
+    /*}*/
+    /*.login div{*/
+    /*    width: 100%;*/
+    /*    height: 50px;*/
+    /*    clear: both;*/
+    /*    display: flex;*/
+    /*    align-items: center;*/
+    /*    justify-content: space-between;*/
+    /*    margin-top: 230px;*/
+    /*}*/
+    /*.btna{*/
+    /*    width: 35%;*/
+    /*    height: 100%;*/
+    /*    background-color: #55a532;*/
+    /*}*/
+    /*.btnb{*/
+    /*    width: 35%;*/
+    /*    height: 100%;*/
+    /*    background-color: #0086b3;*/
+    /*}*/
+</style>

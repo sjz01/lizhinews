@@ -1,23 +1,27 @@
 <template>
   <div id="app">
-    <Navbar />
     <router-view></router-view>
-    <Tabbar />
+  
+       
+   
   </div>
 </template>
 
 <script>
+  
   import Tabbar from './components/Tabar'
-  import Navbar from  './components/Navbar'
-  import Newlines from  './components/Newlines'
+
 
   export default {
     name: "APP",
     components:{
-      Tabbar,Navbar,Newlines
+      Tabbar
     }
   }
 </script>
 <style lang="less">
-
+  html,body{
+    width: 100%;
+    height: 100%;
+  }
 </style>

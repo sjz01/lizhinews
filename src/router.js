@@ -4,13 +4,20 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes: [
       {
         path:'/',
-        component:() => import('./components/Newlines')
+        component:() => import('./components/Newlines'),
       },
+      {
+        path:"/Details",
+        name:"Details",
+        component:() =>import("./components/Details.vue")
+    },
+        
+    
     {
       path:'/Hot',
       component:() => import('./components/Hot')
@@ -21,7 +28,21 @@ export default new Router({
     },
     {
       path:'/mine',
-      component:() => import('./components/Mine')
+      component:() => import('./components/Mine'),
+      children:[
+        {
+          path:'login',
+          component:()=> import('./components/login')
+        },
+        {
+          path:'rehister',
+          component:() => import('./components/Rehister')
+        }
+      ]
+    },
+    {
+      path:'*',
+      redirect:'/'
     }
   ]
 })

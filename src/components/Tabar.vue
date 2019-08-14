@@ -13,10 +13,10 @@
                 <p>&#xe731;</p>
                 <p>推荐</p>
             </router-link>
-            <router-link tag="li" to="/mine">
-                <p>&#xe620;</p>
-                <p>我的</p>
-            </router-link>
+                <router-link tag="li" to="/mine" name="/mine">
+                    <p>&#xe620;</p>
+                    <p>我的</p>
+                </router-link>
         </ul>
     </div>
 </template>
@@ -31,30 +31,31 @@
     #tabbar{
         position: fixed;
         bottom: 0;
-        height: 80px;
+        height: 50px;
         width: 100%;
-        background-color: #cccccc;
+        // margin-top: 50px;
+        background-color: #fff;
 
         ul {
             width: 100%;
-            height: 100%;
+            height: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
-
-
+            z-index: 10;
 
                 li {
                 float: left;
                 text-align: center;
-                height: 100%;
+                height: 50px;
                 flex-grow: 1;
-                font-family: 'myFont';
-                font-size: 24px;
+                font-family: 'Myfont';
+                font-size: 16px;
                 padding-top: 5px;
              }
+            
             .router-link-active{
-                color: tomato;
+                color: rgb(165, 46, 46);
             }
         }
     }
